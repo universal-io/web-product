@@ -238,6 +238,53 @@
   "footer": {
     "domain": "universal-io.com",
     "platforms": "macOS · iOS",
-    "copyright": "© 2026 Universal I/O"
+    "copyright": "© 2026 Universal I/O",
+    "company": "Company",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "company": {
+    "kicker": "Company",
+    "title": "Company overview",
+    "rows": [
+      { "k": "Company name", "v": "Universal I/O Inc. (placeholder)" },
+      { "k": "Founded", "v": "2026" },
+      { "k": "Representative", "v": "To be announced" },
+      { "k": "Location", "v": "Tokyo, Japan" },
+      { "k": "Business", "v": "Development of Universal I/O, a semantic input/output layer for human communication (macOS / iOS)" },
+      { "k": "Contact", "v": "hello@universal-io.com" }
+    ],
+    "note": "This page is a placeholder. Official corporate information will be published before launch."
+  },
+  "privacy": {
+    "kicker": "Legal",
+    "title": "Privacy Policy",
+    "updated": "Last updated: July 3, 2026",
+    "sections": [
+      { "title": "1. Introduction", "body": "This Privacy Policy explains how Universal I/O (“we”, “our”) collects, uses, and protects your information when you use our website and products." },
+      { "title": "2. Information we collect", "body": "We collect the email address you submit when requesting early access, and basic usage data such as pages viewed, browser type, and device type." },
+      { "title": "3. How we use information", "body": "We use your information to respond to early-access requests, improve our products and website, and send occasional product updates. We do not sell personal data." },
+      { "title": "4. Data retention and security", "body": "We keep personal data only for as long as necessary for the purposes described above, and protect it with industry-standard technical and organizational safeguards." },
+      { "title": "5. Third-party services", "body": "We rely on trusted infrastructure providers, such as hosting and analytics services, that process data on our behalf under appropriate agreements." },
+      { "title": "6. Your rights", "body": "You may request access to, correction of, or deletion of your personal data at any time by contacting us at the address below." },
+      { "title": "7. Changes to this policy", "body": "We may update this policy from time to time. Material changes will be announced on this page." },
+      { "title": "8. Contact", "body": "For questions about this policy, contact us at hello@universal-io.com." }
+    ]
+  },
+  "terms": {
+    "kicker": "Legal",
+    "title": "Terms of Service",
+    "updated": "Last updated: July 3, 2026",
+    "sections": [
+      { "title": "1. Acceptance of terms", "body": "By accessing or using the Universal I/O website or products (the “Service”), you agree to be bound by these Terms of Service." },
+      { "title": "2. Service description", "body": "Universal I/O is currently offered as an early-access product. Features, availability, and pricing may change without notice during this period." },
+      { "title": "3. Use of the Service", "body": "You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of others or restrict their use of the Service." },
+      { "title": "4. Intellectual property", "body": "All content, trademarks, and software that are part of the Service are the property of Universal I/O or its licensors and are protected by applicable laws." },
+      { "title": "5. Disclaimer", "body": "The Service is provided “as is” without warranties of any kind, whether express or implied, including fitness for a particular purpose." },
+      { "title": "6. Limitation of liability", "body": "To the maximum extent permitted by law, Universal I/O shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service." },
+      { "title": "7. Changes to these terms", "body": "We may revise these terms from time to time. Continued use of the Service after changes take effect constitutes acceptance of the revised terms." },
+      { "title": "8. Governing law", "body": "These terms are governed by the laws of Japan. Any disputes shall be subject to the exclusive jurisdiction of the Tokyo District Court." },
+      { "title": "9. Contact", "body": "For questions about these terms, contact us at hello@universal-io.com." }
+    ]
   }
 }

@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const links = [
-  { href: "#product", key: "product", mono: false },
-  { href: "#use-cases", key: "useCases", mono: false },
-  { href: "#principles", key: "principles", mono: false },
-  { href: "#io", key: "io", mono: true },
+  { href: "/#product", key: "product", mono: false },
+  { href: "/#use-cases", key: "useCases", mono: false },
+  { href: "/#principles", key: "principles", mono: false },
+  { href: "/#io", key: "io", mono: true },
 ] as const;
 
 export default function Nav() {
@@ -37,8 +38,8 @@ export default function Nav() {
   return (
     <>
       <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-hair bg-white/85 px-5 py-3.5 backdrop-blur-xl sm:px-10 sm:py-[18px]">
-        <a
-          href="#top"
+        <Link
+          href="/"
           onClick={() => setOpen(false)}
           className="flex items-baseline gap-2.5 text-ink"
         >
@@ -48,12 +49,12 @@ export default function Nav() {
           <span className="hidden text-[13px] font-medium tracking-[0.01em] text-slate min-[420px]:inline">
             Universal I/O
           </span>
-        </a>
+        </Link>
 
         {/* desktop */}
         <div className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.key}
               href={l.href}
               className={`text-sm font-medium text-body transition-colors hover:text-ink ${
@@ -61,15 +62,15 @@ export default function Nav() {
               }`}
             >
               {t(l.key)}
-            </a>
+            </Link>
           ))}
           <LanguageSwitcher />
-          <a
-            href="#access"
+          <Link
+            href="/#access"
             className="rounded-[10px] bg-ink px-[18px] py-2.5 text-sm font-semibold text-white transition-colors hover:bg-iris"
           >
             {t("cta")}
-          </a>
+          </Link>
         </div>
 
         {/* mobile */}
@@ -112,7 +113,7 @@ export default function Nav() {
         <div className="relative flex h-full flex-col overflow-y-auto px-6 pb-10 pt-[92px]">
           <div className="flex flex-col">
             {links.map((l, i) => (
-              <a
+              <Link
                 key={l.key}
                 href={l.href}
                 onClick={() => setOpen(false)}
@@ -123,7 +124,7 @@ export default function Nav() {
               >
                 {t(l.key)}
                 <span className="font-mono text-sm text-ghost">{"//"}</span>
-              </a>
+              </Link>
             ))}
           </div>
           <div
@@ -132,13 +133,13 @@ export default function Nav() {
               open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
             }`}
           >
-            <a
-              href="#access"
+            <Link
+              href="/#access"
               onClick={() => setOpen(false)}
               className="rounded-xl bg-ink px-7 py-4 text-center text-base font-semibold text-white transition-colors active:bg-iris"
             >
               {t("cta")}
-            </a>
+            </Link>
             <div className="text-center font-mono text-xs tracking-[0.06em] text-faint">
               macOS · iOS · universal-io.com
             </div>
