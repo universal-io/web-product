@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #FFFFFF; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: #5B5CFF; color: #FFFFFF; }
+    @keyframes ioBlink { 0%, 54% { opacity: 1; } 55%, 100% { opacity: 0; } }
+    @keyframes ioFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes ioFlow { 0% { transform: translateX(0); opacity: 0; } 18% { opacity: 1; } 82% { opacity: 1; } 100% { transform: translateX(48px); opacity: 0; } }
+    @keyframes ioScan { 0% { background-position: 200% 0; } 100% { background-position: -100% 0; } }
+    @keyframes ioRing { 0% { box-shadow: 0 0 0 0 rgba(91,92,255,0.30); } 100% { box-shadow: 0 0 0 16px rgba(91,92,255,0); } }
+    @keyframes ioPulseSoft { 0%, 100% { opacity: 1; } 50% { opacity: 0.72; } }
+  </style>
+</helmet>
+
+<div style="font-family:'Geist','Helvetica Neue',Helvetica,sans-serif;color:#101114;background:#FFFFFF;-webkit-font-smoothing:antialiased;">
+
+  <!-- ============ NAV ============ -->
+  <nav data-screen-label="Nav" style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(255,255,255,0.85);backdrop-filter:blur(14px);border-bottom:1px solid #EEF0F4;">
+    <a href="#top" style="display:flex;align-items:baseline;gap:10px;text-decoration:none;color:#101114;">
+      <span style="font-size:19px;font-weight:700;letter-spacing:-0.02em;">I<span style="color:#5B5CFF;">//</span>O</span>
+      <span style="font-size:13px;font-weight:500;color:#7A8194;letter-spacing:0.01em;">Universal I/O</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:28px;">
+      <a href="#product" style="font-size:14px;font-weight:500;color:#43485C;text-decoration:none;" style-hover="color:#101114;">Product</a>
+      <a href="#use-cases" style="font-size:14px;font-weight:500;color:#43485C;text-decoration:none;" style-hover="color:#101114;">Use Cases</a>
+      <a href="#principles" style="font-size:14px;font-weight:500;color:#43485C;text-decoration:none;" style-hover="color:#101114;">Principles</a>
+      <a href="#io" style="font-size:14px;font-weight:500;color:#43485C;text-decoration:none;font-family:'Geist Mono',monospace;" style-hover="color:#101114;">I//O</a>
+      <a href="#access" style="font-size:14px;font-weight:600;color:#FFFFFF;background:#101114;padding:10px 18px;border-radius:10px;text-decoration:none;" style-hover="background:#5B5CFF;">Request access</a>
+    </div>
+  </nav>
+
+  <!-- ============ 1 · HERO ============ -->
+  <section id="top" data-screen-label="Hero" style="padding:104px 40px 96px;display:flex;flex-direction:column;align-items:center;text-align:center;">
+    <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#7A8194;border:1px solid #E7EAF0;border-radius:999px;padding:7px 16px;animation:ioFadeUp 0.6s ease both;">
+      Early access · universal-io.com
+    </div>
+    <h1 style="font-size:76px;font-weight:600;letter-spacing:-0.035em;line-height:1.04;max-width:900px;margin:32px 0 0;text-wrap:balance;animation:ioFadeUp 0.6s 0.08s ease both;">
+      The universal interface for human intent.
+    </h1>
+    <p style="font-size:20px;line-height:1.6;color:#43485C;max-width:640px;margin:26px 0 0;text-wrap:pretty;animation:ioFadeUp 0.6s 0.16s ease both;">
+      Universal I/O turns messy communication, requests, and ideas into clear, safe, work-ready output — before they enter your tools.
+    </p>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:38px;animation:ioFadeUp 0.6s 0.24s ease both;">
+      <a href="#access" style="font-size:16px;font-weight:600;color:#FFFFFF;background:#101114;padding:15px 28px;border-radius:12px;text-decoration:none;" style-hover="background:#5B5CFF;">Request early access</a>
+      <a href="#demo" style="font-size:16px;font-weight:600;color:#101114;background:#FFFFFF;border:1px solid #D9DEE7;padding:14px 28px;border-radius:12px;text-decoration:none;" style-hover="border-color:#101114;">See how I//O works</a>
+    </div>
+    <div style="font-family:'Geist Mono',monospace;font-size:12px;color:#9BA3B5;margin-top:22px;letter-spacing:0.04em;animation:ioFadeUp 0.6s 0.3s ease both;">
+      macOS first · iOS · works where you type
+    </div>
+
+    <!-- I//O machine -->
+    <div style="width:100%;max-width:1120px;margin-top:72px;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:24px;padding:44px 44px 36px;animation:ioFadeUp 0.7s 0.4s ease both;">
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:28px;align-items:center;text-align:left;">
+
+        <!-- raw input -->
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:16px;padding:22px 24px;box-shadow:0 1px 2px rgba(16,17,20,0.04);">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9BA3B5;text-transform:uppercase;margin-bottom:12px;">Raw input</div>
+          <div style="font-size:17px;line-height:1.55;color:#101114;font-weight:500;">
+            “{{ input }}”<span style="display:inline-block;width:2px;height:18px;background:#101114;margin-left:3px;vertical-align:-3px;animation:ioBlink 1.1s step-start infinite;"></span>
+          </div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;color:#FF6B6B;margin-top:14px;letter-spacing:0.04em;">{{ inputMeta }}</div>
+        </div>
+
+        <!-- symbol -->
+        <div style="display:flex;align-items:center;gap:18px;">
+          <div style="position:relative;width:52px;height:2px;background:#D9DEE7;border-radius:1px;">
+            <span style="position:absolute;top:-3px;left:0;width:8px;height:8px;border-radius:50%;background:#5B5CFF;animation:ioFlow 1.6s linear infinite;"></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:58px;font-weight:600;letter-spacing:-0.02em;color:#101114;line-height:1;">I</span>
+            <span style="width:4px;height:46px;border-radius:2px;background:#5B5CFF;animation:ioBlink 1.1s step-start infinite;"></span>
+            <span style="font-size:58px;font-weight:600;line-height:1;background-image:linear-gradient(110deg,#5B5CFF 35%,#37D5F2 50%,#5B5CFF 65%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ioScan 2.8s linear infinite;">//</span>
+            <span style="width:46px;height:46px;border:5px solid #101114;border-radius:50%;animation:ioRing 2.4s ease-out infinite;"></span>
+          </div>
+          <div style="position:relative;width:52px;height:2px;background:#D9DEE7;border-radius:1px;">
+            <span style="position:absolute;top:-3px;left:0;width:8px;height:8px;border-radius:50%;background:#37D5F2;animation:ioFlow 1.6s 0.5s linear infinite;"></span>
+          </div>
+        </div>
+
+        <!-- structured output -->
+        <div key="{{ runKey }}" style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:16px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,17,20,0.04);animation:ioFadeUp 0.45s ease both;">
+            <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9BA3B5;text-transform:uppercase;margin-bottom:10px;">Structured output</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ fields }}" as="f" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:#F7F8FA;border-radius:9px;padding:8px 12px;">
+                  <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#7A8194;text-transform:uppercase;">{{ f.k }}</span>
+                  <span style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#101114;">
+                    <sc-if value="{{ f.hasDot }}" hint-placeholder-val="{{ false }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ f.dot }};display:inline-block;"></span></sc-if>
+                    {{ f.v }}
+                  </span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:16px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,17,20,0.04);animation:ioFadeUp 0.45s 0.12s ease both;">
+            <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#5B5CFF;text-transform:uppercase;margin-bottom:8px;">Suggested rewrite</div>
+            <div style="font-size:14px;line-height:1.5;color:#101114;">“{{ rewrite }}”</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;animation:ioFadeUp 0.45s 0.22s ease both;">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;color:#9BA3B5;letter-spacing:0.06em;">READY FOR</span>
+            <sc-for list="{{ targets }}" as="t" hint-placeholder-count="3">
+              <span style="font-size:12px;font-weight:500;color:#43485C;background:#FFFFFF;border:1px solid #E7EAF0;border-radius:999px;padding:4px 11px;">{{ t.name }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- example chips -->
+      <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:36px;">
+        <sc-for list="{{ chips }}" as="chip" hint-placeholder-count="5">
+          <button onClick="{{ chip.onClick }}" style="font-family:'Geist','Helvetica Neue',sans-serif;font-size:13px;font-weight:500;padding:9px 17px;border-radius:999px;cursor:pointer;background:{{ chip.bg }};color:{{ chip.fg }};border:1px solid {{ chip.bd }};transition:all 0.2s ease;" style-hover="border-color:#101114;">{{ chip.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div style="display:flex;align-items:center;gap:20px;max-width:1120px;margin:0 auto;padding:0 40px;">
+    <div style="flex:1;height:1px;background:#EEF0F4;"></div>
+    <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#C4CAD6;letter-spacing:0.1em;">I//O</span>
+    <div style="flex:1;height:1px;background:#EEF0F4;"></div>
+  </div>
+
+  <!-- ============ 2 · PROBLEM ============ -->
+  <section data-screen-label="Problem" style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+    <div style="max-width:680px;">
+      <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">The problem</div>
+      <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin:0;text-wrap:balance;">Work starts messy. Software expects clean.</h2>
+      <p style="font-size:18px;line-height:1.65;color:#43485C;margin:22px 0 0;text-wrap:pretty;">
+        Every company runs on human input. Messages. Requests. Notes. Escalations. Tiny sentences with expensive consequences. But work systems expect structured, safe, complete information — and people do not write like databases. People write like people.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;margin-top:64px;">
+      <!-- messy side -->
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9BA3B5;text-transform:uppercase;margin-bottom:4px;">What people write</div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:12px;padding:13px 18px;font-size:15px;color:#101114;transform:rotate(-0.6deg);box-shadow:0 1px 2px rgba(16,17,20,0.04);">“Need this ASAP”</div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:12px;padding:13px 18px;font-size:15px;color:#101114;transform:rotate(0.5deg);box-shadow:0 1px 2px rgba(16,17,20,0.04);">“As I already explained…”</div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:12px;padding:13px 18px;font-size:15px;color:#101114;transform:rotate(-0.4deg);box-shadow:0 1px 2px rgba(16,17,20,0.04);">“Can someone handle this?”</div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:12px;padding:13px 18px;font-size:15px;color:#101114;transform:rotate(0.7deg);box-shadow:0 1px 2px rgba(16,17,20,0.04);">“This seems wrong”</div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:12px;padding:13px 18px;font-size:15px;color:#101114;transform:rotate(-0.5deg);box-shadow:0 1px 2px rgba(16,17,20,0.04);">“Please fix by EOD”</div>
+      </div>
+
+      <!-- gap -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:0 8px;">
+        <div style="width:1px;height:72px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+        <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#FF6B6B;text-transform:uppercase;writing-mode:vertical-rl;">The Intent Gap</div>
+        <div style="width:1px;height:72px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+      </div>
+
+      <!-- systems side -->
+      <div>
+        <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9BA3B5;text-transform:uppercase;margin-bottom:16px;">What systems expect</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">CRM</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">Slack</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">Jira</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">Notion</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">HRIS</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">Support desk</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">AI agents</div>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:12px;padding:14px 16px;font-size:14px;font-weight:500;color:#43485C;">Compliance logs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3 · WHAT IT DOES ============ -->
+  <section id="product" data-screen-label="What it does" style="background:#F7F8FA;border-top:1px solid #EEF0F4;border-bottom:1px solid #EEF0F4;">
+    <div style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+      <div style="max-width:680px;">
+        <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">What Universal I/O does</div>
+        <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin:0;text-wrap:balance;">A small layer before every big workflow.</h2>
+        <p style="font-size:18px;line-height:1.65;color:#43485C;margin:22px 0 0;">
+          Universal I/O captures intent at the input moment and converts it into safer, clearer, more useful output.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;">
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;" style-hover="border-color:#5B5CFF;">
+          <div style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;margin-bottom:16px;">01</div>
+          <h3 style="font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em;">Rewrite with context</h3>
+          <p style="font-size:15px;line-height:1.6;color:#43485C;margin:0;">Make messages clearer, calmer, and easier to act on.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;" style-hover="border-color:#5B5CFF;">
+          <div style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;margin-bottom:16px;">02</div>
+          <h3 style="font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em;">Extract intent</h3>
+          <p style="font-size:15px;line-height:1.6;color:#43485C;margin:0;">Identify requests, facts, deadlines, owners, risks, and next actions.</p>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;background:#101114;border-radius:18px;padding:28px;">
+          <span style="font-size:44px;font-weight:600;color:#FFFFFF;letter-spacing:-0.02em;">I<span style="background-image:linear-gradient(110deg,#5B5CFF 35%,#37D5F2 50%,#5B5CFF 65%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ioScan 2.8s linear infinite;">//</span>O</span>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;" style-hover="border-color:#5B5CFF;">
+          <div style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;margin-bottom:16px;">03</div>
+          <h3 style="font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em;">Route to tools</h3>
+          <p style="font-size:15px;line-height:1.6;color:#43485C;margin:0;">Convert human input into tasks, notes, tickets, summaries, or system-ready data.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;" style-hover="border-color:#5B5CFF;">
+          <div style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;margin-bottom:16px;">04</div>
+          <h3 style="font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em;">Reduce communication risk</h3>
+          <p style="font-size:15px;line-height:1.6;color:#43485C;margin:0;">Flag ambiguity, emotional escalation, legal sensitivity, or compliance issues.</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;" style-hover="border-color:#5B5CFF;">
+          <div style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;margin-bottom:16px;">05</div>
+          <h3 style="font-size:19px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em;">Preserve privacy</h3>
+          <p style="font-size:15px;line-height:1.6;color:#43485C;margin:0;">Help the sender before the message becomes a team problem.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4 · DEMO ============ -->
+  <section id="demo" data-screen-label="Demo" style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+    <div style="max-width:680px;">
+      <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">Demo</div>
+      <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin:0;">From sentence to system.</h2>
+      <p style="font-size:18px;line-height:1.65;color:#43485C;margin:22px 0 0;">
+        Universal I/O turns one messy input into multiple usable outputs.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:24px;margin-top:56px;align-items:start;">
+      <!-- raw -->
+      <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:20px;padding:30px;">
+        <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#9BA3B5;text-transform:uppercase;margin-bottom:16px;">Raw input · as typed</div>
+        <p style="font-size:21px;line-height:1.55;font-weight:500;color:#101114;margin:0;">
+          “This is still broken. I thought we already fixed it. Please deal with it today.”
+        </p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:20px;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#FF6B6B;"></span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#FF6B6B;letter-spacing:0.04em;">Frustrated tone detected</span>
+        </div>
+        <button onClick="{{ rerunDemo }}" style="display:flex;align-items:center;gap:9px;margin-top:28px;font-family:'Geist','Helvetica Neue',sans-serif;font-size:15px;font-weight:600;color:#FFFFFF;background:#5B5CFF;border:none;border-radius:11px;padding:13px 22px;cursor:pointer;" style-hover="background:#4849E8;">
+          <span style="font-family:'Geist Mono',monospace;font-weight:600;">//</span> Run I//O
+        </button>
+      </div>
+
+      <!-- outputs -->
+      <div key="{{ demoKey }}" style="display:flex;flex-direction:column;gap:14px;">
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:16px;padding:22px 24px;box-shadow:0 1px 3px rgba(16,17,20,0.05);animation:ioFadeUp 0.5s 0.1s ease both;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#5B5CFF;text-transform:uppercase;">1 · Safer message</span>
+            <span style="width:7px;height:7px;border-radius:50%;background:#37D5F2;"></span>
+          </div>
+          <p style="font-size:16px;line-height:1.55;color:#101114;margin:0;">“Could you check this again today? It looks like the issue may still be unresolved.”</p>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:16px;padding:22px 24px;box-shadow:0 1px 3px rgba(16,17,20,0.05);animation:ioFadeUp 0.5s 0.28s ease both;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#5B5CFF;text-transform:uppercase;margin-bottom:12px;">2 · Task data</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="background:#F7F8FA;border-radius:9px;padding:9px 13px;"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:#9BA3B5;text-transform:uppercase;">Action</div><div style="font-size:13px;font-weight:500;margin-top:3px;">Recheck unresolved issue</div></div>
+            <div style="background:#F7F8FA;border-radius:9px;padding:9px 13px;"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:#9BA3B5;text-transform:uppercase;">Owner</div><div style="font-size:13px;font-weight:500;margin-top:3px;">Unassigned</div></div>
+            <div style="background:#F7F8FA;border-radius:9px;padding:9px 13px;"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:#9BA3B5;text-transform:uppercase;">Deadline</div><div style="font-size:13px;font-weight:500;margin-top:3px;">Today</div></div>
+            <div style="background:#F7F8FA;border-radius:9px;padding:9px 13px;"><div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.06em;color:#9BA3B5;text-transform:uppercase;">Priority</div><div style="font-size:13px;font-weight:500;margin-top:3px;">Medium-high</div></div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:16px;padding:22px 24px;box-shadow:0 1px 3px rgba(16,17,20,0.05);animation:ioFadeUp 0.5s 0.46s ease both;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#5B5CFF;text-transform:uppercase;margin-bottom:10px;">3 · Suggested next step</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:13px;font-weight:500;color:#101114;border:1px solid #D9DEE7;border-radius:999px;padding:7px 14px;">Create task</span>
+            <span style="font-size:13px;font-weight:500;color:#101114;border:1px solid #D9DEE7;border-radius:999px;padding:7px 14px;">Send message</span>
+            <span style="font-size:13px;font-weight:500;color:#101114;border:1px solid #D9DEE7;border-radius:999px;padding:7px 14px;">Ask for missing context</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5 · USE CASES ============ -->
+  <section id="use-cases" data-screen-label="Use cases" style="background:#F7F8FA;border-top:1px solid #EEF0F4;border-bottom:1px solid #EEF0F4;">
+    <div style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+      <div style="max-width:680px;">
+        <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">Use cases</div>
+        <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin:0;">One interface. Many surfaces.</h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;">
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#9BA3B5;text-transform:uppercase;">Workplace Communication</div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin:0;text-wrap:balance;">Before a message becomes a bomb, make it useful.</h3>
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;line-height:1.7;color:#7A8194;background:#F7F8FA;border-radius:10px;padding:12px 14px;">
+            <span style="text-decoration:line-through;color:#FF6B6B;">“Fix it or I'm escalating.”</span><br>
+            <span style="color:#5B5CFF;">//</span> “Can we prioritize this today?”
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8;color:#43485C;">
+            <li>Rewrite harsh messages</li>
+            <li>Clarify vague requests</li>
+            <li>Reduce escalation, preserve intent</li>
+          </ul>
+          <sc-if value="{{ witty }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:13px;font-weight:600;color:#FF6B6B;margin-top:auto;">Less boom. More done.</div>
+          </sc-if>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#9BA3B5;text-transform:uppercase;">Customer Support</div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin:0;text-wrap:balance;">Turn customer chaos into clean cases.</h3>
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;line-height:1.7;color:#7A8194;background:#F7F8FA;border-radius:10px;padding:12px 14px;">
+            <span style="text-decoration:line-through;color:#FF6B6B;">“Nothing works!!”</span><br>
+            <span style="color:#5B5CFF;">//</span> Case: login failure · urgent
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8;color:#43485C;">
+            <li>Summarize complaints</li>
+            <li>Extract action items, detect urgency</li>
+            <li>Create support-ready records</li>
+          </ul>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#9BA3B5;text-transform:uppercase;">HR &amp; People Ops</div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin:0;text-wrap:balance;">Handle sensitive words before they become sensitive incidents.</h3>
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;line-height:1.7;color:#7A8194;background:#F7F8FA;border-radius:10px;padding:12px 14px;">
+            <span style="text-decoration:line-through;color:#FF6B6B;">“That comment was out of line.”</span><br>
+            <span style="color:#5B5CFF;">//</span> Flagged: policy-sensitive wording
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8;color:#43485C;">
+            <li>Review tone, flag sensitive wording</li>
+            <li>Suggest safer alternatives</li>
+            <li>Keep feedback constructive</li>
+          </ul>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#9BA3B5;text-transform:uppercase;">Global Teams</div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin:0;text-wrap:balance;">Translate more than language.</h3>
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;line-height:1.7;color:#7A8194;background:#F7F8FA;border-radius:10px;padding:12px 14px;">
+            <span style="text-decoration:line-through;color:#FF6B6B;">“It would be nice if…”</span><br>
+            <span style="color:#5B5CFF;">//</span> Explicit request: review by Friday
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8;color:#43485C;">
+            <li>Adapt tone across cultures</li>
+            <li>Make intent explicit</li>
+            <li>Reduce misreadings</li>
+          </ul>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #E7EAF0;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#9BA3B5;text-transform:uppercase;">AI Agent Input</div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin:0;text-wrap:balance;">Give agents better ingredients.</h3>
+          <div style="font-family:'Geist Mono',monospace;font-size:12px;line-height:1.7;color:#7A8194;background:#F7F8FA;border-radius:10px;padding:12px 14px;">
+            <span style="text-decoration:line-through;color:#FF6B6B;">“Clean this up somehow”</span><br>
+            <span style="color:#5B5CFF;">//</span> Steps: 3 · Constraints: 2
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8;color:#43485C;">
+            <li>Structure vague instructions</li>
+            <li>Extract constraints, add context</li>
+            <li>Convert intent into executable steps</li>
+          </ul>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px dashed #C4CAD6;border-radius:18px;padding:28px;">
+          <span style="font-family:'Geist Mono',monospace;font-size:24px;color:#C4CAD6;">I//O</span>
+          <span style="font-size:14px;color:#9BA3B5;text-align:center;">Your surface next.</span>
+          <a href="#access" style="font-size:14px;font-weight:600;color:#5B5CFF;text-decoration:none;">Request access →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6 · WHY NOW ============ -->
+  <section data-screen-label="Why now" style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+    <div style="max-width:720px;">
+      <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">Why now</div>
+      <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:0;text-wrap:balance;">The next interface is not another app. It is the layer between apps.</h2>
+      <p style="font-size:18px;line-height:1.65;color:#43485C;margin:22px 0 0;text-wrap:pretty;">
+        AI is entering every workflow, but the input layer is still mostly human typing into boxes. Universal I/O turns that moment into an intelligent surface. Before the CRM. Before the ticket. Before the Slack message. Before the agent. Before the mistake.
+      </p>
+    </div>
+
+    <!-- layer map -->
+    <div style="margin-top:64px;display:flex;flex-direction:column;align-items:center;gap:0;">
+      <div style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E7EAF0;border-radius:999px;padding:11px 24px;box-shadow:0 1px 2px rgba(16,17,20,0.04);">
+        <span style="width:8px;height:8px;border-radius:50%;background:#FF6B6B;"></span>
+        <span style="font-size:15px;font-weight:500;">Human input</span>
+      </div>
+      <div style="width:1px;height:36px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+      <div style="width:100%;max-width:880px;display:flex;align-items:center;justify-content:center;gap:14px;background:#101114;border-radius:16px;padding:22px;animation:ioPulseSoft 4s ease-in-out infinite;">
+        <span style="font-size:24px;font-weight:600;color:#FFFFFF;letter-spacing:-0.01em;">I<span style="color:#5B5CFF;">//</span>O</span>
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.1em;color:#9BA3B5;text-transform:uppercase;">Universal I/O · the input layer</span>
+      </div>
+      <div style="width:100%;max-width:880px;display:flex;justify-content:space-around;">
+        <div style="width:1px;height:36px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+        <div style="width:1px;height:36px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+        <div style="width:1px;height:36px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+        <div style="width:1px;height:36px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:880px;">
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">Slack</span>
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">Jira</span>
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">CRM</span>
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">Notion</span>
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">Support desk</span>
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">AI agents</span>
+        <span style="font-size:14px;font-weight:500;color:#43485C;background:#F7F8FA;border:1px solid #E7EAF0;border-radius:999px;padding:9px 18px;">Teams</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7 · PRINCIPLES ============ -->
+  <section id="principles" data-screen-label="Principles" style="background:#F7F8FA;border-top:1px solid #EEF0F4;border-bottom:1px solid #EEF0F4;">
+    <div style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+      <div style="max-width:680px;">
+        <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">Product principles</div>
+        <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin:0;">Built for humans. Useful for machines.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;margin-top:48px;border-top:1px solid #D9DEE7;">
+        <div style="display:grid;grid-template-columns:80px 280px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid #D9DEE7;align-items:baseline;">
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;">01</span>
+          <h3 style="font-size:19px;font-weight:600;margin:0;">Human first</h3>
+          <p style="font-size:16px;line-height:1.6;color:#43485C;margin:0;">People should not have to speak like software.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 280px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid #D9DEE7;align-items:baseline;">
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;">02</span>
+          <h3 style="font-size:19px;font-weight:600;margin:0;">Context-aware</h3>
+          <p style="font-size:16px;line-height:1.6;color:#43485C;margin:0;">The same sentence can mean different things in different teams, roles, and workflows.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 280px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid #D9DEE7;align-items:baseline;">
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;">03</span>
+          <h3 style="font-size:19px;font-weight:600;margin:0;">Safety before surveillance</h3>
+          <p style="font-size:16px;line-height:1.6;color:#43485C;margin:0;">Help people at the point of input, rather than judging them after the fact.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 280px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid #D9DEE7;align-items:baseline;">
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;">04</span>
+          <h3 style="font-size:19px;font-weight:600;margin:0;">Structured by default</h3>
+          <p style="font-size:16px;line-height:1.6;color:#43485C;margin:0;">Every useful output should be easier to route, search, log, or automate.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:80px 280px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid #D9DEE7;align-items:baseline;">
+          <span style="font-family:'Geist Mono',monospace;font-size:13px;color:#5B5CFF;">05</span>
+          <h3 style="font-size:19px;font-weight:600;margin:0;">Lightweight by design</h3>
+          <p style="font-size:16px;line-height:1.6;color:#43485C;margin:0;">Universal I/O should feel like a keyboard, not another dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8 · SYMBOL SYSTEM ============ -->
+  <section id="io" data-screen-label="Symbol system" style="background:#101114;">
+    <div style="padding:120px 40px;max-width:1120px;margin:0 auto;">
+      <div style="max-width:680px;">
+        <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#37D5F2;margin-bottom:18px;">The symbol</div>
+        <h2 style="font-size:48px;font-weight:600;letter-spacing:-0.03em;line-height:1.1;margin:0;color:#FFFFFF;">I//O is the product model.</h2>
+        <p style="font-size:18px;line-height:1.65;color:#9BA3B5;margin:22px 0 0;">
+          The brand symbol represents the transformation from human intent to usable output.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px;">
+        <div style="border:1px solid #2A2C33;border-radius:20px;padding:40px 32px;">
+          <div style="display:flex;align-items:center;gap:8px;height:96px;">
+            <span style="font-size:80px;font-weight:600;color:#FFFFFF;line-height:1;">I</span>
+            <span style="width:4px;height:62px;border-radius:2px;background:#5B5CFF;animation:ioBlink 1.1s step-start infinite;"></span>
+          </div>
+          <h3 style="font-size:18px;font-weight:600;color:#FFFFFF;margin:24px 0 8px;">Input</h3>
+          <p style="font-size:15px;line-height:1.6;color:#9BA3B5;margin:0;">Input, intent, individual, idea. The moment a human starts typing.</p>
+        </div>
+        <div style="border:1px solid #2A2C33;border-radius:20px;padding:40px 32px;">
+          <div style="display:flex;align-items:center;height:96px;">
+            <span style="font-size:80px;font-weight:600;line-height:1;background-image:linear-gradient(110deg,#5B5CFF 35%,#37D5F2 50%,#5B5CFF 65%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ioScan 2.8s linear infinite;">//</span>
+          </div>
+          <h3 style="font-size:18px;font-weight:600;color:#FFFFFF;margin:24px 0 8px;">Translation</h3>
+          <p style="font-size:15px;line-height:1.6;color:#9BA3B5;margin:0;">Translation, review, safety, context, alignment. The intelligent layer in between.</p>
+        </div>
+        <div style="border:1px solid #2A2C33;border-radius:20px;padding:40px 32px;">
+          <div style="display:flex;align-items:center;height:96px;">
+            <span style="width:72px;height:72px;border:7px solid #FFFFFF;border-radius:50%;animation:ioRing 2.4s ease-out infinite;"></span>
+          </div>
+          <h3 style="font-size:18px;font-weight:600;color:#FFFFFF;margin:24px 0 8px;">Output</h3>
+          <p style="font-size:15px;line-height:1.6;color:#9BA3B5;margin:0;">Output, outcome, organization, operation. Work-ready and safe to send.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9 · TRUST ============ -->
+  <section data-screen-label="Trust" style="padding:110px 40px;max-width:1120px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <div style="font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#5B5CFF;margin-bottom:18px;">Privacy &amp; trust</div>
+        <h2 style="font-size:44px;font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:0;text-wrap:balance;">Not surveillance. A personal safety layer.</h2>
+        <p style="font-size:18px;line-height:1.65;color:#43485C;margin:22px 0 0;">
+          Universal I/O is designed to help people before communication becomes organizational risk. It is not here to watch people. It is here to help them say what they actually mean.
+        </p>
+        <p style="font-size:17px;font-weight:600;color:#101114;margin:24px 0 0;">Review at the edge. Share only what matters.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;gap:12px;font-size:15px;line-height:1.5;color:#43485C;"><span style="font-family:'Geist Mono',monospace;color:#5B5CFF;">//</span>Works at the input moment — helps the sender first</li>
+          <li style="display:flex;gap:12px;font-size:15px;line-height:1.5;color:#43485C;"><span style="font-family:'Geist Mono',monospace;color:#5B5CFF;">//</span>Converts raw communication into abstracted, usable work data</li>
+          <li style="display:flex;gap:12px;font-size:15px;line-height:1.5;color:#43485C;"><span style="font-family:'Geist Mono',monospace;color:#5B5CFF;">//</span>Reduces unnecessary exposure of sensitive wording</li>
+          <li style="display:flex;gap:12px;font-size:15px;line-height:1.5;color:#43485C;"><span style="font-family:'Geist Mono',monospace;color:#5B5CFF;">//</span>Safer collaboration without turning people into dashboards</li>
+        </ul>
+      </div>
+
+      <!-- edge layer visual -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0;">
+        <div style="width:340px;height:340px;border:1px dashed #C4CAD6;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#9BA3B5;background:#FFFFFF;padding:0 10px;text-transform:uppercase;">Edge layer · stays with you</span>
+          <div style="background:#F7F8FA;border:1px solid #E7EAF0;border-radius:14px;padding:18px 20px;max-width:230px;">
+            <div style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#9BA3B5;text-transform:uppercase;margin-bottom:8px;">Your raw words</div>
+            <div style="font-size:14px;line-height:1.5;color:#101114;">“Honestly this whole thing is a disaster…”</div>
+          </div>
+        </div>
+        <div style="width:1px;height:34px;background:repeating-linear-gradient(to bottom,#C4CAD6 0 5px,transparent 5px 10px);"></div>
+        <div style="display:flex;align-items:center;gap:10px;background:#FFFFFF;border:1px solid #E7EAF0;border-radius:999px;padding:11px 22px;box-shadow:0 1px 2px rgba(16,17,20,0.04);">
+          <span style="width:8px;height:8px;border-radius:50%;background:#37D5F2;"></span>
+          <span style="font-size:14px;font-weight:500;">Clean, structured output — only what matters</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 · CTA ============ -->
+  <section id="access" data-screen-label="Early access CTA" style="background:#F7F8FA;border-top:1px solid #EEF0F4;">
+    <div style="padding:130px 40px;max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;">
+      <span style="font-size:36px;font-weight:600;letter-spacing:-0.02em;">I<span style="background-image:linear-gradient(110deg,#5B5CFF 35%,#37D5F2 50%,#5B5CFF 65%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ioScan 2.8s linear infinite;">//</span>O</span>
+      <h2 style="font-size:52px;font-weight:600;letter-spacing:-0.03em;line-height:1.08;margin:28px 0 0;text-wrap:balance;">Build the input layer for your team.</h2>
+      <p style="font-size:18px;line-height:1.65;color:#43485C;margin:22px 0 0;max-width:540px;">
+        Universal I/O is for teams that believe the future of work starts before the message is sent.
+      </p>
+      <div style="display:flex;gap:10px;margin-top:36px;width:100%;max-width:480px;">
+        <input type="email" placeholder="work@company.com" style="flex:1;font-family:'Geist','Helvetica Neue',sans-serif;font-size:15px;padding:15px 18px;border:1px solid #D9DEE7;border-radius:12px;background:#FFFFFF;color:#101114;outline:none;" style-focus="border-color:#5B5CFF;">
+        <button style="font-family:'Geist','Helvetica Neue',sans-serif;font-size:15px;font-weight:600;color:#FFFFFF;background:#101114;border:none;border-radius:12px;padding:15px 26px;cursor:pointer;white-space:nowrap;" style-hover="background:#5B5CFF;">Request early access</button>
+      </div>
+      <sc-if value="{{ witty }}" hint-placeholder-val="{{ true }}">
+        <p style="font-family:'Geist Mono',monospace;font-size:13px;color:#9BA3B5;margin:24px 0 0;">Bring us your messiest workflow. We like weird input.</p>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="border-top:1px solid #EEF0F4;background:#FFFFFF;">
+    <div style="max-width:1120px;margin:0 auto;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:baseline;gap:12px;">
+        <span style="font-size:16px;font-weight:700;">I<span style="color:#5B5CFF;">//</span>O</span>
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9BA3B5;">universal-io.com</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:24px;">
+        <span style="font-family:'Geist Mono',monospace;font-size:12px;color:#9BA3B5;">macOS · iOS</span>
+        <span style="font-size:13px;color:#9BA3B5;">© 2026 Universal I/O</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;autoCycle&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot; },
+  &quot;wittyLines&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Copy&quot; }
+}">
+class Component extends DCLogic {
+  state = { active: 1, runKey: 0, demoKey: 0, userTouched: false };
+
+  examples = [
+    {
+      chip: 'Make this safe',
+      input: "Honestly this is unacceptable. Fix it or I'm escalating.",
+      meta: 'Tone risk: HIGH',
+      fields: [
+        { k: 'Intent', v: 'Report a blocker', dot: '' },
+        { k: 'Tone risk', v: 'High', dot: '#FF6B6B' },
+        { k: 'Action', v: 'Rewrite before send', dot: '' },
+        { k: 'Urgency', v: 'Today', dot: '' },
+      ],
+      rewrite: 'This is blocking me and feels urgent — could we prioritize a fix today?',
+      targets: ['Slack', 'Email'],
+    },
+    {
+      chip: 'Extract the request',
+      input: 'Can you fix this today? We already talked about it.',
+      meta: 'Tone risk: MEDIUM',
+      fields: [
+        { k: 'Intent', v: 'Request a fix', dot: '' },
+        { k: 'Tone risk', v: 'Medium', dot: '#FF6B6B' },
+        { k: 'Deadline', v: 'Today', dot: '' },
+        { k: 'Action', v: 'Create task', dot: '' },
+      ],
+      rewrite: 'Could you take a look today if possible?',
+      targets: ['Slack', 'Jira', 'CRM'],
+    },
+    {
+      chip: 'Create a task',
+      input: "Someone should update the pricing page before Thursday's launch.",
+      meta: 'Owner: MISSING',
+      fields: [
+        { k: 'Task', v: 'Update pricing page', dot: '' },
+        { k: 'Owner', v: 'Unassigned', dot: '#FF6B6B' },
+        { k: 'Deadline', v: 'Thursday (launch)', dot: '' },
+        { k: 'Priority', v: 'High', dot: '' },
+      ],
+      rewrite: 'Task created — needs an owner before Thursday.',
+      targets: ['Jira', 'Linear', 'Notion'],
+    },
+    {
+      chip: 'Remove emotional noise',
+      input: 'As I already explained, this is NOT what we agreed on.',
+      meta: 'Noise: BLAME, REPETITION',
+      fields: [
+        { k: 'Intent', v: 'Flag a mismatch', dot: '' },
+        { k: 'Tone risk', v: 'High', dot: '#FF6B6B' },
+        { k: 'Noise removed', v: 'Blame, repetition', dot: '' },
+        { k: 'Action', v: 'Send safer version', dot: '' },
+      ],
+      rewrite: 'I think this differs from what we agreed — can we review it together?',
+      targets: ['Slack', 'Email'],
+    },
+    {
+      chip: 'Translate intent',
+      input: 'It might be nice to maybe revisit this at some point…',
+      meta: 'Explicitness: LOW',
+      fields: [
+        { k: 'Intent', v: 'Request a review', dot: '' },
+        { k: 'Explicitness', v: 'Low', dot: '#37D5F2' },
+        { k: 'Hidden ask', v: 'Revisit this decision', dot: '' },
+        { k: 'Action', v: 'Make it explicit', dot: '' },
+      ],
+      rewrite: 'Please schedule a review of this decision this week.',
+      targets: ['Calendar', 'Slack'],
+    },
+  ];
+
+  componentDidMount() {
+    if (this.props.autoCycle ?? true) {
+      this.timer = setInterval(() => {
+        if (this.state.userTouched) return;
+        this.setState((s) => ({
+          active: (s.active + 1) % this.examples.length,
+          runKey: s.runKey + 1,
+        }));
+      }, 6500);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timer) clearInterval(this.timer);
+  }
+
+  renderVals() {
+    const ex = this.examples[this.state.active];
+    return {
+      input: ex.input,
+      inputMeta: ex.meta,
+      fields: ex.fields.map((f) => ({ ...f, hasDot: !!f.dot })),
+      rewrite: ex.rewrite,
+      targets: ex.targets.map((name) => ({ name })),
+      runKey: 'run-' + this.state.runKey,
+      chips: this.examples.map((e, i) => ({
+        label: e.chip,
+        bg: i === this.state.active ? '#101114' : '#FFFFFF',
+        fg: i === this.state.active ? '#FFFFFF' : '#43485C',
+        bd: i === this.state.active ? '#101114' : '#E7EAF0',
+        onClick: () =>
+          this.setState((s) => ({ active: i, runKey: s.runKey + 1, userTouched: true })),
+      })),
+      witty: this.props.wittyLines ?? true,
+      rerunDemo: () => this.setState((s) => ({ demoKey: s.demoKey + 1 })),
+      demoKey: 'demo-' + this.state.demoKey,
+    };
+  }
+}
+</script>
+</body>
+</html>

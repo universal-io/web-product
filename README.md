@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Universal I/O — 製品サイト
 
-## Getting Started
+universal-io.com の製品ランディングページ。
+`mockup/Universal IO Landing.dc.html`（Claude デザインのモックアップ）を正として再現し、
+多言語対応・モバイル最適化を加えたもの。
 
-First, run the development server:
+## 技術スタック
+
+- **Next.js 16**（App Router / Turbopack / SSG）
+- **Tailwind CSS v4**（デザイントークンは `src/app/globals.css` の `@theme` に定義）
+- **next-intl v4**（多言語。`/` = 英語、`/ja` = 日本語）
+- フォント: Geist / Geist Mono / Noto Sans JP（next/font 経由）
+
+## 開発
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # 本番ビルド（/en /ja を静的生成）
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ディレクトリ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+mockup/               # Claude デザインのモックアップ（参照用。lint 対象外）
+messages/             # 翻訳ファイル（en.json / ja.json）
+src/
+  app/[locale]/       # ページ・レイアウト（locale ごとに静的生成）
+  app/sitemap.ts      # サイトマップ（hreflang 付き）
+  app/robots.ts
+  components/         # セクションごとのコンポーネント
+  i18n/               # next-intl 設定（routing / navigation / request）
+  proxy.ts            # ロケール判定ミドルウェア
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 言語の追加方法（韓国語・中国語など）
 
-## Learn More
+1. `src/i18n/routing.ts` の `locales` にロケールを追加（例: `"ko"`, `"zh-CN"`, `"zh-TW"`）
+2. `localeNames` に表示名を追加（例: `ko: "한국어"`）
+3. `messages/<locale>.json` を `en.json` をベースに作成
+4. 必要なら `src/app/[locale]/layout.tsx` の `alternates.languages` に追記
 
-To learn more about Next.js, take a look at the following resources:
+これだけで言語スイッチャー・サイトマップ・静的生成に自動反映される。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## デプロイ（Vercel）
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. GitHub リポジトリ（`universal-io/web-product`）を Vercel にインポート
+2. フレームワークは Next.js として自動検出される（設定変更不要）
+3. ドメイン `universal-io.com` を Vercel プロジェクトに割り当てる
 
-## Deploy on Vercel
+## TODO
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] 早期アクセスフォームの送信先（現在はフロントのみで成功表示。Supabase / Resend / フォームサービス等に接続する）
+- [ ] OG 画像の追加
+- [ ] ko / zh-CN / zh-TW の翻訳追加

@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "title": "Universal I/O — The universal interface for human intent",
+    "description": "Universal I/O turns messy communication, requests, and ideas into clear, safe, work-ready output — before they enter your tools. macOS first."
+  },
+  "nav": {
+    "product": "Product",
+    "useCases": "Use Cases",
+    "principles": "Principles",
+    "io": "I//O",
+    "cta": "Request access",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "hero": {
+    "badge": "Early access · universal-io.com",
+    "title": "The universal interface for human intent.",
+    "subtitle": "Universal I/O turns messy communication, requests, and ideas into clear, safe, work-ready output — before they enter your tools.",
+    "ctaPrimary": "Request early access",
+    "ctaSecondary": "See how I//O works",
+    "platforms": "macOS first · iOS · works where you type",
+    "rawLabel": "Raw input",
+    "outputLabel": "Structured output",
+    "rewriteLabel": "Suggested rewrite",
+    "readyFor": "READY FOR",
+    "examples": [
+      {
+        "chip": "Make this safe",
+        "input": "Honestly this is unacceptable. Fix it or I'm escalating.",
+        "meta": "Tone risk: HIGH",
+        "fields": [
+          { "k": "Intent", "v": "Report a blocker" },
+          { "k": "Tone risk", "v": "High", "dot": "#FF6B6B" },
+          { "k": "Action", "v": "Rewrite before send" },
+          { "k": "Urgency", "v": "Today" }
+        ],
+        "rewrite": "This is blocking me and feels urgent — could we prioritize a fix today?",
+        "targets": ["Slack", "Email"]
+      },
+      {
+        "chip": "Extract the request",
+        "input": "Can you fix this today? We already talked about it.",
+        "meta": "Tone risk: MEDIUM",
+        "fields": [
+          { "k": "Intent", "v": "Request a fix" },
+          { "k": "Tone risk", "v": "Medium", "dot": "#FF6B6B" },
+          { "k": "Deadline", "v": "Today" },
+          { "k": "Action", "v": "Create task" }
+        ],
+        "rewrite": "Could you take a look today if possible?",
+        "targets": ["Slack", "Jira", "CRM"]
+      },
+      {
+        "chip": "Create a task",
+        "input": "Someone should update the pricing page before Thursday's launch.",
+        "meta": "Owner: MISSING",
+        "fields": [
+          { "k": "Task", "v": "Update pricing page" },
+          { "k": "Owner", "v": "Unassigned", "dot": "#FF6B6B" },
+          { "k": "Deadline", "v": "Thursday (launch)" },
+          { "k": "Priority", "v": "High" }
+        ],
+        "rewrite": "Task created — needs an owner before Thursday.",
+        "targets": ["Jira", "Linear", "Notion"]
+      },
+      {
+        "chip": "Remove emotional noise",
+        "input": "As I already explained, this is NOT what we agreed on.",
+        "meta": "Noise: BLAME, REPETITION",
+        "fields": [
+          { "k": "Intent", "v": "Flag a mismatch" },
+          { "k": "Tone risk", "v": "High", "dot": "#FF6B6B" },
+          { "k": "Noise removed", "v": "Blame, repetition" },
+          { "k": "Action", "v": "Send safer version" }
+        ],
+        "rewrite": "I think this differs from what we agreed — can we review it together?",
+        "targets": ["Slack", "Email"]
+      },
+      {
+        "chip": "Translate intent",
+        "input": "It might be nice to maybe revisit this at some point…",
+        "meta": "Explicitness: LOW",
+        "fields": [
+          { "k": "Intent", "v": "Request a review" },
+          { "k": "Explicitness", "v": "Low", "dot": "#37D5F2" },
+          { "k": "Hidden ask", "v": "Revisit this decision" },
+          { "k": "Action", "v": "Make it explicit" }
+        ],
+        "rewrite": "Please schedule a review of this decision this week.",
+        "targets": ["Calendar", "Slack"]
+      }
+    ]
+  },
+  "problem": {
+    "kicker": "The problem",
+    "title": "Work starts messy. Software expects clean.",
+    "body": "Every company runs on human input. Messages. Requests. Notes. Escalations. Tiny sentences with expensive consequences. But work systems expect structured, safe, complete information — and people do not write like databases. People write like people.",
+    "writeLabel": "What people write",
+    "messy": [
+      "“Need this ASAP”",
+      "“As I already explained…”",
+      "“Can someone handle this?”",
+      "“This seems wrong”",
+      "“Please fix by EOD”"
+    ],
+    "gapLabel": "The Intent Gap",
+    "systemsLabel": "What systems expect",
+    "systems": ["CRM", "Slack", "Jira", "Notion", "HRIS", "Support desk", "AI agents", "Compliance logs"]
+  },
+  "product": {
+    "kicker": "What Universal I/O does",
+    "title": "A small layer before every big workflow.",
+    "body": "Universal I/O captures intent at the input moment and converts it into safer, clearer, more useful output.",
+    "cards": [
+      { "title": "Rewrite with context", "body": "Make messages clearer, calmer, and easier to act on." },
+      { "title": "Extract intent", "body": "Identify requests, facts, deadlines, owners, risks, and next actions." },
+      { "title": "Route to tools", "body": "Convert human input into tasks, notes, tickets, summaries, or system-ready data." },
+      { "title": "Reduce communication risk", "body": "Flag ambiguity, emotional escalation, legal sensitivity, or compliance issues." },
+      { "title": "Preserve privacy", "body": "Help the sender before the message becomes a team problem." }
+    ]
+  },
+  "demo": {
+    "kicker": "Demo",
+    "title": "From sentence to system.",
+    "body": "Universal I/O turns one messy input into multiple usable outputs.",
+    "rawLabel": "Raw input · as typed",
+    "raw": "“This is still broken. I thought we already fixed it. Please deal with it today.”",
+    "tone": "Frustrated tone detected",
+    "run": "Run I//O",
+    "out1Label": "1 · Safer message",
+    "out1": "“Could you check this again today? It looks like the issue may still be unresolved.”",
+    "out2Label": "2 · Task data",
+    "out2Fields": [
+      { "k": "Action", "v": "Recheck unresolved issue" },
+      { "k": "Owner", "v": "Unassigned" },
+      { "k": "Deadline", "v": "Today" },
+      { "k": "Priority", "v": "Medium-high" }
+    ],
+    "out3Label": "3 · Suggested next step",
+    "out3Chips": ["Create task", "Send message", "Ask for missing context"]
+  },
+  "useCases": {
+    "kicker": "Use cases",
+    "title": "One interface. Many surfaces.",
+    "cards": [
+      {
+        "tag": "Workplace Communication",
+        "title": "Before a message becomes a bomb, make it useful.",
+        "before": "“Fix it or I'm escalating.”",
+        "after": "“Can we prioritize this today?”",
+        "bullets": ["Rewrite harsh messages", "Clarify vague requests", "Reduce escalation, preserve intent"],
+        "witty": "Less boom. More done."
+      },
+      {
+        "tag": "Customer Support",
+        "title": "Turn customer chaos into clean cases.",
+        "before": "“Nothing works!!”",
+        "after": "Case: login failure · urgent",
+        "bullets": ["Summarize complaints", "Extract action items, detect urgency", "Create support-ready records"]
+      },
+      {
+        "tag": "HR & People Ops",
+        "title": "Handle sensitive words before they become sensitive incidents.",
+        "before": "“That comment was out of line.”",
+        "after": "Flagged: policy-sensitive wording",
+        "bullets": ["Review tone, flag sensitive wording", "Suggest safer alternatives", "Keep feedback constructive"]
+      },
+      {
+        "tag": "Global Teams",
+        "title": "Translate more than language.",
+        "before": "“It would be nice if…”",
+        "after": "Explicit request: review by Friday",
+        "bullets": ["Adapt tone across cultures", "Make intent explicit", "Reduce misreadings"]
+      },
+      {
+        "tag": "AI Agent Input",
+        "title": "Give agents better ingredients.",
+        "before": "“Clean this up somehow”",
+        "after": "Steps: 3 · Constraints: 2",
+        "bullets": ["Structure vague instructions", "Extract constraints, add context", "Convert intent into executable steps"]
+      }
+    ],
+    "nextTitle": "Your surface next.",
+    "nextCta": "Request access →"
+  },
+  "whyNow": {
+    "kicker": "Why now",
+    "title": "The next interface is not another app. It is the layer between apps.",
+    "body": "AI is entering every workflow, but the input layer is still mostly human typing into boxes. Universal I/O turns that moment into an intelligent surface. Before the CRM. Before the ticket. Before the Slack message. Before the agent. Before the mistake.",
+    "humanInput": "Human input",
+    "layerSub": "Universal I/O · the input layer",
+    "tools": ["Slack", "Jira", "CRM", "Notion", "Support desk", "AI agents", "Teams"]
+  },
+  "principles": {
+    "kicker": "Product principles",
+    "title": "Built for humans. Useful for machines.",
+    "items": [
+      { "title": "Human first", "body": "People should not have to speak like software." },
+      { "title": "Context-aware", "body": "The same sentence can mean different things in different teams, roles, and workflows." },
+      { "title": "Safety before surveillance", "body": "Help people at the point of input, rather than judging them after the fact." },
+      { "title": "Structured by default", "body": "Every useful output should be easier to route, search, log, or automate." },
+      { "title": "Lightweight by design", "body": "Universal I/O should feel like a keyboard, not another dashboard." }
+    ]
+  },
+  "symbol": {
+    "kicker": "The symbol",
+    "title": "I//O is the product model.",
+    "body": "The brand symbol represents the transformation from human intent to usable output.",
+    "input": { "title": "Input", "body": "Input, intent, individual, idea. The moment a human starts typing." },
+    "translation": { "title": "Translation", "body": "Translation, review, safety, context, alignment. The intelligent layer in between." },
+    "output": { "title": "Output", "body": "Output, outcome, organization, operation. Work-ready and safe to send." }
+  },
+  "trust": {
+    "kicker": "Privacy & trust",
+    "title": "Not surveillance. A personal safety layer.",
+    "body": "Universal I/O is designed to help people before communication becomes organizational risk. It is not here to watch people. It is here to help them say what they actually mean.",
+    "strong": "Review at the edge. Share only what matters.",
+    "bullets": [
+      "Works at the input moment — helps the sender first",
+      "Converts raw communication into abstracted, usable work data",
+      "Reduces unnecessary exposure of sensitive wording",
+      "Safer collaboration without turning people into dashboards"
+    ],
+    "circleLabel": "Edge layer · stays with you",
+    "rawLabel": "Your raw words",
+    "rawText": "“Honestly this whole thing is a disaster…”",
+    "pill": "Clean, structured output — only what matters"
+  },
+  "cta": {
+    "title": "Build the input layer for your team.",
+    "body": "Universal I/O is for teams that believe the future of work starts before the message is sent.",
+    "placeholder": "work@company.com",
+    "button": "Request early access",
+    "witty": "Bring us your messiest workflow. We like weird input.",
+    "success": "Thanks — you're on the list. We'll be in touch soon."
+  },
+  "footer": {
+    "domain": "universal-io.com",
+    "platforms": "macOS · iOS",
+    "copyright": "© 2026 Universal I/O"
+  }
+}
