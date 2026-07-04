@@ -56,7 +56,7 @@ export default function Hero() {
         style={{ animationDelay: "0.24s" }}
       >
         <a
-          href="#access"
+          href="https://dl.universal-io.com/Universal-IO.dmg"
           className="rounded-xl bg-ink px-7 py-[15px] text-base font-semibold text-white transition-colors hover:bg-iris"
         >
           {t("ctaPrimary")}
