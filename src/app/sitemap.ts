@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 
 const BASE_URL = "https://universal-io.com";
-const paths = ["", "/company", "/privacy", "/terms"];
+const paths = ["", "/company", "/privacy", "/terms", "/vision"];
 
 function urlFor(locale: string, path: string) {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;

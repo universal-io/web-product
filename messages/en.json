@@ -286,5 +286,32 @@
       { "title": "8. Governing law", "body": "These terms are governed by the laws of Japan. Any disputes shall be subject to the exclusive jurisdiction of the Tokyo District Court." },
       { "title": "9. Contact", "body": "For questions about these terms, contact us at hello@universal-io.com." }
     ]
+  },
+  "vision": {
+    "meta": {
+      "title": "Universal I/O — A vision for a gentler interface",
+      "description": "Like glasses for the mind, like a cane for the heart — Universal I/O is a soft membrane between you and every tool, smoothing the gaps of ability, language, culture, and experience."
+    },
+    "nav": {
+      "cta": "Join the mission"
+    },
+    "eyebrow": "Universal I/O — A vision",
+    "title": "A gentle membrane between you and every tool.",
+    "subtitle": "Like glasses for the mind, like a cane for the heart — Universal I/O smooths the gaps of ability, language, culture, and experience. It never takes over. It walks beside you.",
+    "ctaPrimary": "Join the mission",
+    "ctaSecondary": "See how it feels",
+    "panel": {
+      "label": "Universal I/O — live",
+      "voice": { "label": "Voice", "value": "calm · 62 dB" },
+      "tone": { "label": "Tone", "value": "warm" },
+      "energy": { "label": "Energy", "value": "34%", "note": "a pause might help" },
+      "speakers": { "label": "2 speakers", "value": "manager ↔ you · formal" },
+      "rewriteLabel": "Suggested rewrite",
+      "rewriteText": "Could we find ten quiet minutes today?"
+    },
+    "guide": {
+      "title": "Guide mode",
+      "body": "Press Shift twice — I'll read the screen with you."
+    }
   }
 }
