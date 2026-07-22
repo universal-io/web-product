@@ -13,6 +13,9 @@ type Example = {
   targets: string[];
 };
 
+const MACOS_DOWNLOAD_URL =
+  "https://dl.universal-io.com/releases/0.1.0/build-2/Universal-IO.dmg";
+
 export default function Hero() {
   const t = useTranslations("hero");
   const examples = t.raw("examples") as Example[];
@@ -56,7 +59,7 @@ export default function Hero() {
         style={{ animationDelay: "0.24s" }}
       >
         <a
-          href="https://dl.universal-io.com/Universal-IO.dmg"
+          href={MACOS_DOWNLOAD_URL}
           className="rounded-xl bg-ink px-7 py-[15px] text-base font-semibold text-white transition-colors hover:bg-iris"
         >
           {t("ctaPrimary")}
