@@ -312,6 +312,37 @@
     "guide": {
       "title": "Guide mode",
       "body": "Press Shift twice — I'll read the screen with you."
+    },
+    "capture": {
+      "hotkeyHint": "One hotkey, anywhere on your Mac",
+      "appName": "Universal I/O",
+      "rawText": "Honestly this is unacceptable. Fix it or I'm escalating.",
+      "chips": ["Tone", "Clarity", "Safety"],
+      "reading": "Reading tone…",
+      "toneChip": "Tone risk: high",
+      "rewriteLabel": "Gentler rewrite",
+      "rewriteText": "This is blocking me and feels urgent — could we prioritize a fix today?",
+      "replaceHint": "to replace before it sends"
+    },
+    "monitor": {
+      "eyebrow": "Data, on your side",
+      "title": "A living dashboard of you.",
+      "subtitle": "Everything the membrane smooths is also a signal. Your mood and mental health, made visible — it can sense early signs that your body or mind might be struggling, so caring for yourself can start sooner.",
+      "disclaimer": "Signals, not diagnoses — not a medical device",
+      "cta": "Join the mission"
+    },
+    "footer": {
+      "tagline": "A gentle membrane between you and every tool.",
+      "status": "All systems operational",
+      "columns": [
+        { "title": "Product", "links": ["Overview", "Vision", "Download", "Changelog"] },
+        { "title": "Company", "links": ["About", "Mission", "Careers", "Contact"] },
+        { "title": "Resources", "links": ["Blog", "Docs", "Support", "Press kit"] },
+        { "title": "Legal", "links": ["Privacy", "Terms", "Security"] }
+      ],
+      "copyright": "© 2026 Universal I/O, Inc.",
+      "note": "Designed between Tokyo & San Francisco",
+      "social": { "x": "X (Twitter)", "github": "GitHub", "linkedin": "LinkedIn" }
     }
   }
 }

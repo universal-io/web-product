@@ -246,7 +246,6 @@ export default function MembranePanel() {
 
   return (
     <motion.div
-      id="membrane"
       ref={panelRef}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
@@ -254,7 +253,7 @@ export default function MembranePanel() {
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="vision-panel relative scroll-mt-28 overflow-hidden rounded-[32px] border border-white/60 p-5 sm:p-7"
+      className="vision-panel relative overflow-hidden rounded-[32px] border border-white/60 p-5 sm:p-7"
     >
       {/* progressive blur layers — each masked so blur strength varies across the panel */}
       <div
