@@ -5,6 +5,9 @@ const legalLinks = [
   { href: "/company", key: "company" },
   { href: "/privacy", key: "privacy" },
   { href: "/terms", key: "terms" },
+  // Required to be reachable before purchase for Japanese customers
+  // (特定商取引法), so it belongs in the footer rather than behind a signup.
+  { href: "/commerce-disclosure", key: "commerceDisclosure" },
 ] as const;
 
 export default function Footer() {

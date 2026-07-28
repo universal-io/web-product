@@ -241,7 +241,8 @@
     "copyright": "© 2026 Universal I/O",
     "company": "Company",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "commerceDisclosure": "Commerce Disclosure"
   },
   "company": {
     "kicker": "Company",
@@ -259,32 +260,63 @@
   "privacy": {
     "kicker": "Legal",
     "title": "Privacy Policy",
-    "updated": "Last updated: July 3, 2026",
+    "updated": "Last updated: July 28, 2026",
     "sections": [
-      { "title": "1. Introduction", "body": "This Privacy Policy explains how Universal I/O (“we”, “our”) collects, uses, and protects your information when you use our website and products." },
-      { "title": "2. Information we collect", "body": "We collect the email address you submit when requesting early access, and basic usage data such as pages viewed, browser type, and device type." },
-      { "title": "3. How we use information", "body": "We use your information to respond to early-access requests, improve our products and website, and send occasional product updates. We do not sell personal data." },
-      { "title": "4. Data retention and security", "body": "We keep personal data only for as long as necessary for the purposes described above, and protect it with industry-standard technical and organizational safeguards." },
-      { "title": "5. Third-party services", "body": "We rely on trusted infrastructure providers, such as hosting and analytics services, that process data on our behalf under appropriate agreements." },
-      { "title": "6. Your rights", "body": "You may request access to, correction of, or deletion of your personal data at any time by contacting us at the address below." },
-      { "title": "7. Changes to this policy", "body": "We may update this policy from time to time. Material changes will be announced on this page." },
-      { "title": "8. Contact", "body": "For questions about this policy, contact us at hello@universal-io.com." }
+      { "title": "1. Introduction", "body": "This Privacy Policy explains how Universal I/O (“we”, “our”) handles your information when you use our website and products. Because the product works by reading what is on your screen and what you say, we describe separately what is sent for processing and what is stored." },
+      { "title": "2. Sent for processing, not stored", "body": "To draft text, understand a screen, transcribe speech, and rework incoming messages, we send screenshots, audio, and the text you are writing to our servers and to the AI providers named below. These are handled only as temporary files for that processing and are not stored in our database. Temporary screenshot and audio files are deleted when the app exits, and any image left behind by an abnormal exit is deleted at the next launch. Conversations in the screen-understanding features are not retained." },
+      { "title": "3. Reference information read from the screen", "body": "To identify which product is on screen, we read the host name of the page shown in your browser. We do not collect the path or the query string. The host name and the surrounding on-screen text are reference information for that single request; they are stored neither on our servers nor in our usage records." },
+      { "title": "4. Stored on your Mac", "body": "The original and final text of messages you actually sent (most recent 100), and unsent drafts, are stored on your Mac in an area scoped to the signed-in account. They are not sent to our servers. A draft is deleted once it has been sent. On sign-out the local store is closed, and its contents are never shown to or used for a different account. Your sign-in session is stored in a keychain area specific to this product." },
+      { "title": "5. Stored on our servers", "body": "We store account information (email address, plan, subscription state) and operational usage records. A usage record contains the feature used, the AI model used, the amount processed (tokens or audio seconds), success or failure, and processing time. We do not store the text you wrote, the AI's response, screenshots, audio, application names, or window titles. Facts about yourself that you confirm in the app are saved only after you agree to each one, and you can review, correct, or delete them from the app at any time." },
+      { "title": "6. AI processing providers", "body": "AI processing is carried out through the OpenAI and Groq APIs. We send requests with API conversation state disabled (store: false), and additionally use each provider's zero data retention setting, under which submitted data is neither used for training nor retained. Zero data retention is a setting in each provider's own console; we verify it before launch and during ongoing operation." },
+      { "title": "7. Other providers", "body": "We use Supabase for authentication and our database, Vercel for server hosting, Cloudflare for application distribution, and Stripe for payments. Credit card numbers are handled by Stripe and are not retained by us. All of these process data on our behalf under appropriate agreements." },
+      { "title": "8. Retention", "body": "Usage records are kept for 90 days, after which they are added to a monthly aggregate that does not identify you and the detailed rows are deleted. History on your Mac is capped at the most recent 100 entries, with older entries removed. Account information is kept for as long as the account exists." },
+      { "title": "9. Your rights and account deletion", "body": "You may request access to, correction of, or deletion of your information. You can also delete your account yourself from within the app. On deletion we require a recent sign-in for safety, then remove your authentication record, usage records, profile, personal tenant, and the history and drafts held on your Mac. If you have an active paid subscription, it must be cancelled first." },
+      { "title": "10. Information we ask you not to send", "body": "The product sends the screen exactly as it appears at the moment you ask it to. Please do not use screen-sending features while passwords, API secret keys, bank account details, or identity documents are visible. We also instruct the AI models not to read out values of this kind, but that constrains model behaviour only — it does not prevent the screen from being sent." },
+      { "title": "11. Changes to this policy", "body": "We may update this policy from time to time. Material changes will be announced on this page." },
+      { "title": "12. Contact", "body": "For questions about this policy, contact us at hello@universal-io.com." }
     ]
   },
   "terms": {
     "kicker": "Legal",
     "title": "Terms of Service",
-    "updated": "Last updated: July 3, 2026",
+    "updated": "Last updated: July 28, 2026",
     "sections": [
       { "title": "1. Acceptance of terms", "body": "By accessing or using the Universal I/O website or products (the “Service”), you agree to be bound by these Terms of Service." },
-      { "title": "2. Service description", "body": "Universal I/O is currently offered as an early-access product. Features, availability, and pricing may change without notice during this period." },
-      { "title": "3. Use of the Service", "body": "You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of others or restrict their use of the Service." },
-      { "title": "4. Intellectual property", "body": "All content, trademarks, and software that are part of the Service are the property of Universal I/O or its licensors and are protected by applicable laws." },
-      { "title": "5. Disclaimer", "body": "The Service is provided “as is” without warranties of any kind, whether express or implied, including fitness for a particular purpose." },
-      { "title": "6. Limitation of liability", "body": "To the maximum extent permitted by law, Universal I/O shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service." },
-      { "title": "7. Changes to these terms", "body": "We may revise these terms from time to time. Continued use of the Service after changes take effect constitutes acceptance of the revised terms." },
-      { "title": "8. Governing law", "body": "These terms are governed by the laws of Japan. Any disputes shall be subject to the exclusive jurisdiction of the Tokyo District Court." },
-      { "title": "9. Contact", "body": "For questions about these terms, contact us at hello@universal-io.com." }
+      { "title": "2. Service description", "body": "Universal I/O is currently offered as an early-access product. Features and availability may change during this period." },
+      { "title": "3. Free and paid plans", "body": "The Service offers a plan available at no charge and paid plans billed monthly. The features and the monthly usage limit of each plan are determined by the configuration we maintain, and are shown in the app and on this website." },
+      { "title": "4. Fees and payment", "body": "Fees for paid plans are shown tax-included on the checkout screen. Payment is made by credit card and processed by Stripe, our payment processor. We do not retain credit card numbers. The first period is charged at signup, and each subsequent billing period is charged in turn." },
+      { "title": "5. Automatic renewal and cancellation", "body": "A paid plan renews automatically at the end of each billing period unless you cancel. You can cancel at any time from billing management in the app, and you keep access to the paid plan until the end of the current billing period. We do not issue pro-rated refunds for cancellation mid-period. To delete your account, any active paid subscription must be cancelled first." },
+      { "title": "6. Failed payments", "body": "If a payment does not complete — for example because a card has expired — our payment processor retries it over a period of time. We keep your paid plan available to you during those retries. If the retries are exhausted and the subscription ends, the account moves to the free plan." },
+      { "title": "7. Usage limits", "body": "Each plan has a monthly limit on the number of requests. The limit is counted and reset by calendar month (from the first day of the month, Coordinated Universal Time), which does not align with the start of your billing period. Once the limit is reached, the affected features are unavailable until the next month begins. We may raise limits at any time; we will give notice before lowering one." },
+      { "title": "8. Price changes", "body": "We may change our prices. A new price applies to new signups; existing paid subscriptions keep the price in effect when they started unless we give separate notice." },
+      { "title": "9. Refunds", "body": "Fees already paid are not refundable, except where a refund is required by law." },
+      { "title": "10. Use of the Service", "body": "You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of others or restrict their use of the Service." },
+      { "title": "11. Intellectual property", "body": "All content, trademarks, and software that are part of the Service are the property of Universal I/O or its licensors and are protected by applicable laws." },
+      { "title": "12. Disclaimer", "body": "The Service is provided “as is” without warranties of any kind, whether express or implied, including fitness for a particular purpose. The Service includes output produced by AI models, the accuracy of which is not guaranteed. How you use that output is your own decision." },
+      { "title": "13. Limitation of liability", "body": "To the maximum extent permitted by law, Universal I/O shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Service." },
+      { "title": "14. Changes to these terms", "body": "We may revise these terms from time to time. Continued use of the Service after changes take effect constitutes acceptance of the revised terms." },
+      { "title": "15. Governing law", "body": "These terms are governed by the laws of Japan. Any disputes shall be subject to the exclusive jurisdiction of the Tokyo District Court." },
+      { "title": "16. Contact", "body": "For questions about these terms, contact us at hello@universal-io.com." }
     ]
+  },
+  "commerceDisclosure": {
+    "kicker": "Legal",
+    "title": "Commerce disclosure",
+    "rows": [
+      { "k": "Seller", "v": "To be announced" },
+      { "k": "Representative", "v": "To be announced" },
+      { "k": "Address", "v": "To be announced" },
+      { "k": "Phone", "v": "To be announced\nInquiries are received at the email address below." },
+      { "k": "Email", "v": "hello@universal-io.com" },
+      { "k": "Price", "v": "To be announced\nPlan prices are shown tax-included on the checkout screen." },
+      { "k": "Additional costs", "v": "Internet connection charges are the customer's responsibility." },
+      { "k": "Payment method", "v": "Credit card (processed by Stripe)" },
+      { "k": "Payment timing", "v": "Charged on signup, then automatically at each renewal of the billing period." },
+      { "k": "Delivery of service", "v": "Available immediately after payment completes." },
+      { "k": "Cancellation", "v": "To be announced\nCancel at any time from billing management. Access continues until the end of the current billing period." },
+      { "k": "Refunds", "v": "To be announced" },
+      { "k": "System requirements", "v": "macOS 14 or later" }
+    ],
+    "note": "This page is a placeholder. It will be replaced with the full disclosure required by Japan's Act on Specified Commercial Transactions before paid plans go on sale."
   }
 }
