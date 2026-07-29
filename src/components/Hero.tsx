@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
 type Field = { k: string; v: string; dot?: string };
 type Example = {
@@ -12,9 +13,6 @@ type Example = {
   rewrite: string;
   targets: string[];
 };
-
-const MACOS_DOWNLOAD_URL =
-  "https://dl.universal-io.com/releases/0.1.0/build-2/Universal-IO.dmg";
 
 export default function Hero() {
   const t = useTranslations("hero");

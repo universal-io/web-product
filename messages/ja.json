@@ -9,7 +9,7 @@
     "principles": "原則",
     "pricing": "料金",
     "io": "I//O",
-    "cta": "アクセスをリクエスト",
+    "cta": "macOS版をダウンロード",
     "openMenu": "メニューを開く",
     "closeMenu": "メニューを閉じる",
     "language": "言語"
@@ -183,7 +183,7 @@
       }
     ],
     "nextTitle": "次は、あなたの現場へ。",
-    "nextCta": "アクセスをリクエスト →"
+    "nextCta": "macOS版をダウンロード →"
   },
   "whyNow": {
     "kicker": "なぜ今か",
@@ -231,10 +231,9 @@
   "cta": {
     "title": "あなたのチームに、入力レイヤーを。",
     "body": "Universal I/O は、仕事の未来は「メッセージが送信される前」に始まると信じるチームのためのプロダクトです。",
-    "placeholder": "work@company.com",
-    "button": "早期アクセスをリクエスト",
-    "witty": "一番めちゃくちゃなワークフローを持ってきてください。変わった入力は大歓迎です。",
-    "success": "ありがとうございます。リストに追加しました。追ってご連絡します。"
+    "button": "macOS版をダウンロード",
+    "secondary": "料金を見る",
+    "witty": "一番めちゃくちゃなワークフローを持ってきてください。変わった入力は大歓迎です。"
   },
   "footer": {
     "domain": "universal-io.com",

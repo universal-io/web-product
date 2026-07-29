@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
+import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
 type Card = {
   tag: string;
@@ -60,7 +61,7 @@ export default function UseCases() {
               {t("nextTitle")}
             </span>
             <a
-              href="#access"
+              href={MACOS_DOWNLOAD_URL}
               className="text-sm font-semibold text-iris transition-colors hover:text-iris-deep"
             >
               {t("nextCta")}

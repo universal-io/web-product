@@ -9,7 +9,7 @@
     "principles": "Principles",
     "pricing": "Pricing",
     "io": "I//O",
-    "cta": "Request access",
+    "cta": "Download for macOS",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language"
@@ -183,7 +183,7 @@
       }
     ],
     "nextTitle": "Your surface next.",
-    "nextCta": "Request access →"
+    "nextCta": "Download for macOS →"
   },
   "whyNow": {
     "kicker": "Why now",
@@ -231,10 +231,9 @@
   "cta": {
     "title": "Build the input layer for your team.",
     "body": "Universal I/O is for teams that believe the future of work starts before the message is sent.",
-    "placeholder": "work@company.com",
-    "button": "Request early access",
-    "witty": "Bring us your messiest workflow. We like weird input.",
-    "success": "Thanks — you're on the list. We'll be in touch soon."
+    "button": "Download for macOS",
+    "secondary": "See pricing",
+    "witty": "Bring us your messiest workflow. We like weird input."
   },
   "footer": {
     "domain": "universal-io.com",

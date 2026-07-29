@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
-const DOWNLOAD_URL = "https://dl.universal-io.com/Universal-IO.dmg";
 const CONTACT_EMAIL = "hello@universal-io.com";
 // Buying needs a signed-in session, which this marketing host does not have.
 // The Gateway page handles sign-in and starts Stripe Checkout; the plan travels
@@ -141,7 +141,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           </a>
         ) : plan.ctaKind === "download" ? (
           <a
-            href={DOWNLOAD_URL}
+            href={MACOS_DOWNLOAD_URL}
             className={`block rounded-[10px] px-5 py-3 text-center text-sm font-semibold transition-colors ${
               plan.highlight
                 ? "bg-ink text-white hover:bg-iris"

@@ -1,20 +1,19 @@
-"use client";
-
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Reveal from "./Reveal";
+import { MACOS_DOWNLOAD_URL } from "@/lib/download";
+import { Link } from "@/i18n/navigation";
+
+// The closing section used to collect an email address for early access. That
+// form was never wired to anything — it set a success flag locally and dropped
+// what was typed, so it told people they were on a list that did not exist. The
+// product is downloadable now, so the ask is the download, and anyone who wants
+// the paid plan continues from the pricing page, which is the only place that
+// knows how to start Checkout.
+//
+// No longer a client component: with the form gone there is no state here.
 
 export default function Cta() {
   const t = useTranslations("cta");
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    // TODO: connect to a real endpoint (e.g. Supabase / Resend / form service)
-    setSent(true);
-  };
 
   return (
     <section id="access" className="scroll-mt-16 border-t border-hair bg-paper">
@@ -29,33 +28,20 @@ export default function Cta() {
           {t("body")}
         </p>
 
-        {sent ? (
-          <div className="mt-9 flex items-center gap-2.5 rounded-xl border border-line bg-white px-6 py-4 text-[15px] font-medium text-ink shadow-[0_1px_2px_rgba(16,17,20,0.04)]">
-            <span className="h-2 w-2 rounded-full bg-cyan" />
-            {t("success")}
-          </div>
-        ) : (
-          <form
-            onSubmit={submit}
-            className="mt-9 flex w-full max-w-[480px] flex-col gap-2.5 sm:flex-row"
+        <div className="mt-9 flex flex-col items-center gap-5 sm:flex-row sm:gap-6">
+          <a
+            href={MACOS_DOWNLOAD_URL}
+            className="whitespace-nowrap rounded-xl bg-ink px-[26px] py-[15px] text-[15px] font-semibold text-white transition-colors hover:bg-iris"
           >
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t("placeholder")}
-              aria-label={t("placeholder")}
-              className="flex-1 rounded-xl border border-edge bg-white px-[18px] py-[15px] text-[15px] text-ink outline-none transition-colors placeholder:text-faint focus:border-iris"
-            />
-            <button
-              type="submit"
-              className="cursor-pointer whitespace-nowrap rounded-xl bg-ink px-[26px] py-[15px] text-[15px] font-semibold text-white transition-colors hover:bg-iris"
-            >
-              {t("button")}
-            </button>
-          </form>
-        )}
+            {t("button")}
+          </a>
+          <Link
+            href="/pricing"
+            className="text-[15px] font-semibold text-iris transition-colors hover:text-iris-deep"
+          >
+            {t("secondary")}
+          </Link>
+        </div>
 
         <p className="mt-6 font-mono text-[13px] text-faint">{t("witty")}</p>
       </Reveal>

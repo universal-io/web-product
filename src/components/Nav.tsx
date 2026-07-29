@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
 const links = [
   { href: "/#product", key: "product", mono: false },
@@ -68,12 +69,12 @@ export default function Nav() {
             </Link>
           ))}
           <LanguageSwitcher />
-          <Link
-            href="/#access"
+          <a
+            href={MACOS_DOWNLOAD_URL}
             className="rounded-[10px] bg-ink px-[18px] py-2.5 text-sm font-semibold text-white transition-colors hover:bg-iris"
           >
             {t("cta")}
-          </Link>
+          </a>
         </div>
 
         {/* mobile */}
@@ -136,13 +137,13 @@ export default function Nav() {
               open ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
             }`}
           >
-            <Link
-              href="/#access"
+            <a
+              href={MACOS_DOWNLOAD_URL}
               onClick={() => setOpen(false)}
               className="rounded-xl bg-ink px-7 py-4 text-center text-base font-semibold text-white transition-colors active:bg-iris"
             >
               {t("cta")}
-            </Link>
+            </a>
             <div className="text-center font-mono text-xs tracking-[0.06em] text-faint">
               macOS · iOS · universal-io.com
             </div>
