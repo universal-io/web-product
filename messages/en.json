@@ -7,6 +7,7 @@
     "product": "Product",
     "useCases": "Use Cases",
     "principles": "Principles",
+    "pricing": "Pricing",
     "io": "I//O",
     "cta": "Request access",
     "openMenu": "Open menu",
@@ -243,6 +244,66 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "commerceDisclosure": "Commerce Disclosure"
+  },
+  "pricing": {
+    "kicker": "Pricing",
+    "title": "Pick by how much you use it, not by which features you get.",
+    "subtitle": "Universal I/O is available for macOS. Every feature works on the free plan. What differs between plans is how much you can use in a month.",
+    "intervalNote": "Monthly only, in Japanese yen, tax included. Annual billing is in preparation.",
+    "footnote": "One request is one operation — drafting, a review, a dictation, or reading the screen. The limit is counted and reset by calendar month (from the first day of the month, UTC), which does not align with the start of a billing period. All prices include Japanese consumption tax.",
+    "plans": [
+      {
+        "audience": "For individuals",
+        "name": "Free",
+        "price": "¥0",
+        "tagline": "Find out what changes when writing stops being the slow part.",
+        "features": [
+          "500 requests per month",
+          "Compose: draft, review, dictate, and send into the target app",
+          "Transform: the point of an incoming message, and a reply to it",
+          "Vision / Copilot: read the screen, answer, and guide the next step",
+          "Product-specific tuning for Slack, Gmail, Google Analytics, and Stripe",
+          "Output in Japanese or English",
+          "Screenshots and audio are never stored"
+        ],
+        "cta": "Download for macOS",
+        "ctaNote": "No credit card required.",
+        "ctaKind": "download"
+      },
+      {
+        "audience": "For daily use",
+        "name": "Standard",
+        "price": "¥1,980",
+        "priceNote": "/ month, tax incl.",
+        "tagline": "Use it every day and the free allowance runs out. This plan raises the ceiling, nothing else.",
+        "featuresLead": "Everything in Free, plus",
+        "features": [
+          "2,000 requests per month (four times the free allowance)",
+          "No feature is withheld — the only difference is the monthly limit",
+          "Priority on bug reports and feature requests",
+          "Cancel any time; access continues to the end of the billing period"
+        ],
+        "cta": "Download for macOS",
+        "ctaNote": "You start on the free plan. Paid signup is being prepared.",
+        "ctaKind": "download",
+        "highlight": true
+      },
+      {
+        "audience": "For companies and teams",
+        "name": "Enterprise",
+        "price": "In preparation",
+        "badge": "Coming soon",
+        "tagline": "We are working out the administration and contract shape an organization needs. Tell us what yours requires.",
+        "features": [
+          "Team use and administration",
+          "Visibility into usage",
+          "Contract and invoicing arrangements",
+          "Security requirements"
+        ],
+        "cta": "Contact us",
+        "ctaKind": "contact"
+      }
+    ]
   },
   "company": {
     "kicker": "Company",

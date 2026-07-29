@@ -9,6 +9,9 @@ const links = [
   { href: "/#product", key: "product", mono: false },
   { href: "/#use-cases", key: "useCases", mono: false },
   { href: "/#principles", key: "principles", mono: false },
+  // A real page rather than an anchor: someone deciding whether to pay should
+  // be able to reach the terms of that decision from anywhere on the site.
+  { href: "/pricing", key: "pricing", mono: false },
   { href: "/#io", key: "io", mono: true },
 ] as const;
 
