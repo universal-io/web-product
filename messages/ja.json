@@ -283,9 +283,10 @@
           "要望と不具合報告への優先対応",
           "いつでも解約でき、解約後もその請求期間の末日まで使えます"
         ],
-        "cta": "macOS版をダウンロード",
-        "ctaNote": "無料プランから始まります。有料プランの登録は提供開始を準備中です。",
-        "ctaKind": "download",
+        "cta": "始める",
+        "ctaNote": "ログイン後、そのままお支払いに進みます。",
+        "ctaKind": "checkout",
+        "planId": "standard",
         "highlight": true
       },
       {

@@ -5,6 +5,10 @@ import Footer from "@/components/Footer";
 
 const DOWNLOAD_URL = "https://dl.universal-io.com/Universal-IO.dmg";
 const CONTACT_EMAIL = "hello@universal-io.com";
+// Buying needs a signed-in session, which this marketing host does not have.
+// The Gateway page handles sign-in and starts Stripe Checkout; the plan travels
+// in the URL so it survives the round trip through the login screen.
+const CHECKOUT_URL = "https://api.universal-io.com/billing/start";
 
 type Plan = {
   audience: string;
@@ -17,9 +21,12 @@ type Plan = {
   features: string[];
   cta: string;
   ctaNote?: string;
-  // download = the DMG, contact = mailto, none = not purchasable yet
-  ctaKind: "download" | "contact" | "none";
+  // checkout = sign in and pay, download = the DMG, contact = mailto,
+  // none = nothing to click yet
+  ctaKind: "checkout" | "download" | "contact" | "none";
   highlight?: boolean;
+  /** Which plan Checkout should start. Required when ctaKind is "checkout". */
+  planId?: string;
 };
 
 export async function generateMetadata({
@@ -121,7 +128,18 @@ function PlanCard({ plan }: { plan: Plan }) {
 
       {/* mt-auto keeps the button on the baseline across cards of unequal length */}
       <div className="mt-auto pt-7">
-        {plan.ctaKind === "download" ? (
+        {plan.ctaKind === "checkout" ? (
+          <a
+            href={`${CHECKOUT_URL}?plan=${encodeURIComponent(plan.planId ?? "")}`}
+            className={`block rounded-[10px] px-5 py-3 text-center text-sm font-semibold transition-colors ${
+              plan.highlight
+                ? "bg-ink text-white hover:bg-iris"
+                : "border border-edge text-ink hover:border-ink"
+            }`}
+          >
+            {plan.cta}
+          </a>
+        ) : plan.ctaKind === "download" ? (
           <a
             href={DOWNLOAD_URL}
             className={`block rounded-[10px] px-5 py-3 text-center text-sm font-semibold transition-colors ${

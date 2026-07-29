@@ -283,9 +283,10 @@
           "Priority on bug reports and feature requests",
           "Cancel any time; access continues to the end of the billing period"
         ],
-        "cta": "Download for macOS",
-        "ctaNote": "You start on the free plan. Paid signup is being prepared.",
-        "ctaKind": "download",
+        "cta": "Get started",
+        "ctaNote": "Sign in, then continue straight to payment.",
+        "ctaKind": "checkout",
+        "planId": "standard",
         "highlight": true
       },
       {
