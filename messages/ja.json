@@ -15,12 +15,12 @@
     "language": "言語"
   },
   "hero": {
-    "badge": "早期アクセス受付中 · universal-io.com",
-    "title": "人の意図をつなぐ、ユニバーサル・インターフェース。",
-    "subtitle": "Universal I/O は、乱雑なコミュニケーションや依頼、アイデアを、ツールに届く前に明確で安全な、そのまま使えるアウトプットへ変換します。",
+    "badge": "Universal I/O",
+    "title": "人と道具をつなぐ、\nユニバーサル・\nインターフェース。",
+    "subtitle": "Universal I/O は、あなたとコンピュータの間で動く案内人です。どんなアプリでも、ウェブサイトでもボタン一つで呼び出せて、問題を瞬時に解決します。慣れない仕事や、慣れない言語、センシティブなコミュニケーションなど、あらゆる難しい局面であなたをサポートします。",
     "ctaPrimary": "macOS版をダウンロード",
     "ctaSecondary": "I//O の仕組みを見る",
-    "platforms": "macOS ファースト · iOS · 入力するすべての場所で",
+    "platforms": "Windows版、iOS版、Android版はウェイティングリスト受付中",
     "rawLabel": "生の入力",
     "outputLabel": "構造化されたアウトプット",
     "rewriteLabel": "リライト案",
@@ -379,5 +379,71 @@
       { "k": "動作環境", "v": "macOS 14 以降" }
     ],
     "note": "本ページは記載準備中のプレースホルダーです。有料プランの提供開始前に、特定商取引法に基づく正式な表記へ更新します。"
+  },
+  "story": {
+    "hotkey": "右 Shift",
+    "hotkeyTimes": "×2",
+    "app": "UNIVERSAL I/O",
+    "reading": "画面を読んでいます",
+    "rereading": "画面を読み直しています",
+    "drafting": "文案を用意しています",
+    "guiding": "案内中",
+    "askHint": "この画面について質問する",
+    "insertHint": "⏎ で入力欄に入れる",
+    "scenes": {
+      "read": {
+        "monologue": "これ、どういう意味？",
+        "url": "app.example.com/drafts",
+        "docTitle": "Q3 サマリー（下書き）",
+        "notice": "You're not signed in. Changes are kept in this browser only and will be discarded when this session ends.",
+        "answer": "サインインしていないので、いまの変更はこのブラウザの中だけに残っています。この画面を閉じると消えます。",
+        "hint": "保存するには、サインインが必要です。"
+      },
+      "guide": {
+        "monologue": "そのボタン、どこ？",
+        "ask": "そのボタン、どこ？",
+        "step1": "右上の「Sign in」を押してください。",
+        "step2": "「Google で続ける」を押してください。",
+        "done": "サインインできました。下書きはアカウントに保存されています。",
+        "signinTitle": "Sign in to save your work",
+        "signinGoogle": "Google で続ける",
+        "signinEmail": "メールアドレスで続ける",
+        "savedBadge": "アカウントに保存されました"
+      },
+      "grasp": {
+        "monologue": "結局、なんて言ってるんだろう？",
+        "app": "Slack",
+        "channel": "#project-akira",
+        "sender": "中川",
+        "time": "14:32",
+        "message": "先日ご相談いただいた件ですが、こちらでも引き続き確認は進めているところではあるものの、他の案件との優先順位の兼ね合いもあり、現時点では一旦保留という形にさせていただけないかと考えております。もちろん状況が変わり次第すぐに動けるよう準備はしておきますので、その点はご安心いただければ幸いです。",
+        "rows": [
+          {
+            "k": "要点",
+            "v": "今回は見送り。ただし断りではなく、状況が変われば再開したい"
+          },
+          {
+            "k": "求められていること",
+            "v": "保留にすることへの同意"
+          },
+          {
+            "k": "期限",
+            "v": "書かれていません"
+          }
+        ]
+      },
+      "reply": {
+        "monologue": "どう返事すれば……",
+        "draftLabel": "返信の文案",
+        "draft": "承知しました。いったん保留で問題ありません。再開できそうなタイミングが見えたら教えてください。",
+        "placeholder": "#project-akira にメッセージを送る"
+      }
+    },
+    "tabs": [
+      "これ、どういう意味？",
+      "そのボタン、どこ？",
+      "なんて言ってるんだろう？",
+      "どう返事すれば…"
+    ]
   }
 }

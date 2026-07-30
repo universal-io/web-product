@@ -9,6 +9,7 @@ import WhyNow from "@/components/WhyNow";
 import Principles from "@/components/Principles";
 import SymbolSystem from "@/components/SymbolSystem";
 import Trust from "@/components/Trust";
+import IOMachine from "@/components/IOMachine";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 
@@ -43,6 +44,8 @@ export default async function Home({
         <Principles />
         <SymbolSystem />
         <Trust />
+        {/* Parked here while the page is reworked from the top down. */}
+        <IOMachine />
         <Cta />
       </main>
       <Footer />
