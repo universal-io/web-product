@@ -15,12 +15,12 @@
     "language": "Language"
   },
   "hero": {
-    "badge": "Early access · universal-io.com",
-    "title": "The universal interface for human intent.",
-    "subtitle": "Universal I/O turns messy communication, requests, and ideas into clear, safe, work-ready output — before they enter your tools.",
+    "badge": "Universal I/O",
+    "title": "The universal interface\nbetween people\nand their tools.",
+    "subtitle": "Universal I/O is a guide that works between you and your computer. Call it up in any app or on any website with a single key, and it settles the problem on the spot. Unfamiliar work, an unfamiliar language, a conversation that needs care — it stays with you through all of it.",
     "ctaPrimary": "Download for macOS",
     "ctaSecondary": "See how I//O works",
-    "platforms": "macOS first · iOS · works where you type",
+    "platforms": "Windows, iOS and Android — waiting list open",
     "rawLabel": "Raw input",
     "outputLabel": "Structured output",
     "rewriteLabel": "Suggested rewrite",
@@ -379,5 +379,71 @@
       { "k": "System requirements", "v": "macOS 14 or later" }
     ],
     "note": "This page is a placeholder. It will be replaced with the full disclosure required by Japan's Act on Specified Commercial Transactions before paid plans go on sale."
+  },
+  "story": {
+    "hotkey": "right Shift",
+    "hotkeyTimes": "×2",
+    "app": "UNIVERSAL I/O",
+    "reading": "Reading your screen",
+    "rereading": "Reading the screen again",
+    "drafting": "Writing a reply",
+    "guiding": "Guiding",
+    "askHint": "Ask about this screen",
+    "insertHint": "⏎ to put it in the field",
+    "scenes": {
+      "read": {
+        "monologue": "Wait — what does this mean?",
+        "url": "app.example.com/drafts",
+        "docTitle": "Q3 summary (draft)",
+        "notice": "You're not signed in. Changes are kept in this browser only and will be discarded when this session ends.",
+        "answer": "You're not signed in, so this draft only exists in this browser. Close the tab and it's gone.",
+        "hint": "To keep it, you need to sign in."
+      },
+      "guide": {
+        "monologue": "Where's that button?",
+        "ask": "Where's that button?",
+        "step1": "Top right — press “Sign in”.",
+        "step2": "Now press “Continue with Google”.",
+        "done": "You're signed in. The draft is saved to your account.",
+        "signinTitle": "Sign in to save your work",
+        "signinGoogle": "Continue with Google",
+        "signinEmail": "Continue with email",
+        "savedBadge": "Saved to your account"
+      },
+      "grasp": {
+        "monologue": "So… what are they actually saying?",
+        "app": "Slack",
+        "channel": "#project-akira",
+        "sender": "Taylor",
+        "time": "2:32 PM",
+        "message": "Circling back on what you raised the other day — we're still looking into it on our side, but given where the other priorities have landed, I wonder whether it might make sense to park it for now. Of course we'll be ready to pick it straight back up the moment things change, so no need to worry on that front.",
+        "rows": [
+          {
+            "k": "The point",
+            "v": "They're pausing it — not turning it down"
+          },
+          {
+            "k": "What they want",
+            "v": "You to agree to park it for now"
+          },
+          {
+            "k": "Deadline",
+            "v": "None stated"
+          }
+        ]
+      },
+      "reply": {
+        "monologue": "How do I even reply to this…",
+        "draftLabel": "Suggested reply",
+        "draft": "Understood — happy to park it for now. Just let me know when it's worth picking back up.",
+        "placeholder": "Message #project-akira"
+      }
+    },
+    "tabs": [
+      "What does this mean?",
+      "Where's that button?",
+      "What are they saying?",
+      "How do I reply?"
+    ]
   }
 }
