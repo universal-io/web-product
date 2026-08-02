@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import MeshHeadline from "@/components/MeshHeadline";
 import StoryReel from "@/components/StoryReel";
 import { Link } from "@/i18n/navigation";
 import { MACOS_DOWNLOAD_URL } from "@/lib/download";
@@ -16,12 +17,12 @@ export default function Hero() {
       </div>
       {/* Line breaks are authored in the message, so the headline reads the
           same way at every width instead of being rebalanced by the browser. */}
-      <h1
-        className="io-fade-up mt-8 max-w-[900px] whitespace-pre-line text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[56px] sm:leading-[1.05] lg:text-[76px] lg:leading-[1.04]"
-        style={{ animationDelay: "0.08s" }}
-      >
-        {t("title")}
-      </h1>
+      <div className="io-fade-up mt-8" style={{ animationDelay: "0.08s" }}>
+        <MeshHeadline
+          text={t("title")}
+          className="max-w-[900px] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[56px] sm:leading-[1.05] lg:text-[76px] lg:leading-[1.04]"
+        />
+      </div>
       <p
         className="io-fade-up mt-6 max-w-[640px] text-pretty text-[17px] leading-[1.6] text-body sm:text-xl"
         style={{ animationDelay: "0.16s" }}
