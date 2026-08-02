@@ -36,7 +36,7 @@ const ROWS = 36;
  */
 const INTENSITY = 0.1;
 /** Radius of the cursor's influence, as a fraction of the headline's height. */
-const SIGMA = 0.5;
+const SIGMA = 0.2;
 /** How hard the sheet is sucked toward the cursor, before INTENSITY. */
 const PULL = 0.34 * INTENSITY;
 /** How far the sheet trails behind the cursor's motion, before INTENSITY. */
