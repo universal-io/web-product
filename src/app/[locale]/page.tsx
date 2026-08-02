@@ -19,16 +19,8 @@ export default async function Home({
       <Nav />
       <main>
         <Hero />
-
-        {/* divider */}
-        <div className="mx-auto flex max-w-[1120px] items-center gap-5 px-5 sm:px-10">
-          <div className="h-px flex-1 bg-hair" />
-          <span className="font-mono text-xs tracking-[0.1em] text-ghost">
-            I//O
-          </span>
-          <div className="h-px flex-1 bg-hair" />
-        </div>
-
+        {/* No divider between these two: the section below is grey against the
+            hero's white, so the edge is already there. */}
         <Capabilities />
       </main>
       <Footer />
