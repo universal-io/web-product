@@ -288,6 +288,8 @@ export default function MeshHeadline({
     /* --- physics ----------------------------------------------------- */
 
     let target: { x: number; y: number } | null = null;
+    /** Set when the cursor arrives from nowhere, so it is not chased in from a stale spot. */
+    let snap = true;
     let px = 0.5;
     let py = 0.5;
     let pull = 0;
@@ -314,6 +316,20 @@ export default function MeshHeadline({
     const step = () => {
       frame = 0;
       if (!ready) return;
+
+      // The cursor has to start where it actually is. Chasing it in from the
+      // last known spot — or, on the very first move, from the middle of the
+      // headline — drags the sheet across the words on the way, which reads
+      // as a tug at nothing.
+      if (target && snap) {
+        snap = false;
+        px = target.x;
+        py = target.y;
+        dragX = 0;
+        dragY = 0;
+        dragVX = 0;
+        dragVY = 0;
+      }
 
       const wasX = px;
       const wasY = py;
@@ -358,12 +374,15 @@ export default function MeshHeadline({
       const y = 1 - (e.clientY - box.top) / box.height;
       // A band around the headline, roughly as wide as the falloff reaches, so
       // the sheet is already moving by the time the cursor arrives at the words.
-      target = x > -0.5 && x < 1.5 && y > -0.6 && y < 1.6 ? { x, y } : null;
+      const next = x > -0.5 && x < 1.5 && y > -0.6 && y < 1.6 ? { x, y } : null;
+      if (next && !target) snap = true;
+      target = next;
       wake();
     };
 
     const onLeave = () => {
       target = null;
+      snap = true;
       wake();
     };
 
