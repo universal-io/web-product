@@ -34,7 +34,7 @@ const ROWS = 36;
  * leaves the drag to carry the whole effect while the cursor is moving. At 1
  * the sheet visibly bulges; at 0.1 it is a few pixels and easy to miss.
  */
-const INTENSITY = 0.1;
+const INTENSITY = 0.2;
 /** Radius of the cursor's influence, as a fraction of the headline's height. */
 const SIGMA = 0.2;
 /** How hard the sheet is sucked toward the cursor, before INTENSITY. */
@@ -369,13 +369,26 @@ export default function MeshHeadline({
 
     /* --- wiring ------------------------------------------------------ */
 
-    paint();
-    // The webfont almost always lands after first paint, and the headline is
-    // measured and drawn in whatever face is loaded at the time.
-    document.fonts?.ready.then(paint).catch(() => {});
+    // Nothing is drawn, and the h1 is not handed over, until the fonts the
+    // headline will actually be set in have arrived. Painting earlier means
+    // capturing the fallback face into the texture and then swapping it for
+    // the real one — which is visible, and reads as the headline flickering
+    // on load.
+    let ro: ResizeObserver | undefined;
+    let dropped = false;
 
-    const ro = new ResizeObserver(paint);
-    ro.observe(h1);
+    const start = () => {
+      if (dropped) return;
+      paint();
+      ro = new ResizeObserver(paint);
+      ro.observe(h1);
+    };
+
+    if (document.fonts && document.fonts.status !== "loaded") {
+      document.fonts.ready.then(start).catch(start);
+    } else {
+      start();
+    }
 
     window.addEventListener("pointermove", onMove, { passive: true });
     document.documentElement.addEventListener("mouseleave", onLeave);
@@ -388,7 +401,8 @@ export default function MeshHeadline({
     canvas.addEventListener("webglcontextlost", onLost);
 
     return () => {
-      ro.disconnect();
+      dropped = true;
+      ro?.disconnect();
       window.removeEventListener("pointermove", onMove);
       document.documentElement.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("blur", onLeave);
@@ -405,20 +419,16 @@ export default function MeshHeadline({
 
   return (
     <div ref={wrapRef} className="relative">
-      <h1
-        ref={h1Ref}
-        className={`whitespace-pre-line transition-opacity duration-200 ${className} ${
-          live ? "opacity-0" : ""
-        }`}
-      >
+      {/* The handover is one frame, not a crossfade: both show the same words
+          in the same face, so fading between them only makes the headline dim
+          and come back. */}
+      <h1 ref={h1Ref} className={`whitespace-pre-line ${className} ${live ? "opacity-0" : ""}`}>
         {text}
       </h1>
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className={`pointer-events-none absolute transition-opacity duration-200 ${
-          live ? "opacity-100" : "opacity-0"
-        }`}
+        className={`pointer-events-none absolute ${live ? "opacity-100" : "opacity-0"}`}
         style={{ top: -PAD, left: -PAD }}
       />
     </div>
