@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 
-// Fictional, looping product demo.
+// Fictional product demo, told like a story reel.
 //
 // Four scenes play in sequence, each one a thought the user has in front of a
 // screen they don't understand, answered without leaving that screen:
@@ -12,37 +13,37 @@ import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/rea
 //   guide — a button that is hard to find gets pointed at
 //   grasp — a roundabout chat message gets broken down
 //   reply — a draft reply is waiting, and lands in the message box
+// A fifth slide hands the move to the reader: press right Shift twice on this
+// very page and a scripted panel reads the page itself (SiteDemo, below).
 //
 // Every scene runs the same beats, so the reel reads as one repeated move
 // rather than four different tricks:
 //
-//   enter → (spot) → think → linger → dim → hotkey → keyhold → work → hold → exit
+//   enter → think → linger → dim → hotkey → work → answer → (point/insert) → hold → exit
 //
-// The window arrives, the thought is spoken, the screen goes back behind a
-// scrim, the hotkey is pressed on top of it, and only then does the panel
-// arrive — lit, with everything else held down. Held frames of 0.5s sit between
-// the moving parts on purpose: without them the beats blur into one slide.
+// Three devices keep that causal chain legible even at this pace:
+//   - a segmented progress header (the reader always knows where they are)
+//   - a step rail under the thought (困る → 右Shift×2 → 答え, lit in order)
+//   - the answer echoed large in the left column, so the payoff is never
+//     smaller than the problem
 //
-// Nothing here is interactive. Every surface is drawn from scratch with the
-// site's own tokens; no screenshots, no real product code.
+// Nothing here is interactive except the fifth slide's hotkey listener. Every
+// surface is drawn from scratch with the site's own tokens; no screenshots.
 
-type Scene = "read" | "guide" | "grasp" | "reply";
+type Scene = "read" | "guide" | "grasp" | "reply" | "turn";
 
 type Phase =
   | "enter"
-  | "spot"
   | "think"
   | "linger"
   | "dim"
   | "hotkey"
-  | "keyhold"
-  | "reading"
+  | "work"
   | "answer"
   | "point"
-  | "drafting"
-  | "draft"
   | "insert"
   | "hold"
+  | "wait"
   | "exit";
 
 type Step = `${Scene}.${Phase}`;
@@ -52,14 +53,12 @@ const phaseOf = (step: Step) => step.split(".")[1] as Phase;
 
 const TYPE_SPEED = 22;
 /** Time a typing step needs: the characters themselves, plus a beat to read it. */
-const typeMs = (text: string, pad = 900) => text.length * TYPE_SPEED + pad;
-/** A held frame. Long enough to register as a stop, short enough not to drag. */
-const BEAT = 550;
+const typeMs = (text: string, pad = 350) => text.length * TYPE_SPEED + pad;
 
-/** Per-character stagger and fade for the spoken line. Unhurried on purpose. */
-const CHAR_STAGGER = 46;
-const CHAR_FADE = 480;
-const sayMs = (text: string, pad = 500) =>
+/** Per-character stagger and fade for the spoken line. */
+const CHAR_STAGGER = 34;
+const CHAR_FADE = 380;
+const sayMs = (text: string, pad = 420) =>
   text.length * CHAR_STAGGER + CHAR_FADE + pad;
 
 type Row = { k: string; v: string };
@@ -72,14 +71,14 @@ const windowMotion = {
   initial: { opacity: 0, scale: 0.94, y: 16 },
   animate: { opacity: 1, scale: 1, y: 0 },
   exit: { opacity: 0, scale: 0.97, y: -12 },
-  transition: { duration: 0.45, ease: EASE },
+  transition: { duration: 0.4, ease: EASE },
 };
 
 const fade = {
   initial: { opacity: 0, y: 8 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -6 },
-  transition: { duration: 0.28, ease: EASE },
+  transition: { duration: 0.26, ease: EASE },
 };
 
 /* ------------------------------------------------------------------ */
@@ -141,7 +140,7 @@ function SpokenLine({
     <p
       // Line breaks come from the message, so the thought breaks where it was
       // written to break rather than wherever the column happens to end.
-      className="whitespace-pre-line text-[28px] font-semibold leading-[1.22] tracking-[-0.035em] text-white sm:text-[36px] lg:text-[42px] lg:leading-[1.18]"
+      className="whitespace-pre-line text-[27px] font-semibold leading-[1.22] tracking-[-0.035em] text-white sm:text-[34px] lg:text-[40px] lg:leading-[1.16]"
     >
       {chars.map((char, i) => (
         <motion.span
@@ -178,6 +177,151 @@ function MicroLabel({ children }: { children: React.ReactNode }) {
     <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate">
       {children}
     </span>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* progress header + step rail                                         */
+/* ------------------------------------------------------------------ */
+
+/** The moving fill inside a chip or bar. Runs once per scene entry (`run`). */
+function Fill({
+  ms,
+  run,
+  reduce,
+  className = "bg-white/15",
+}: {
+  ms: number;
+  run: number;
+  reduce: boolean | null;
+  className?: string;
+}) {
+  if (reduce) {
+    return <span className={`absolute inset-0 ${className}`} />;
+  }
+  return (
+    <motion.span
+      key={run}
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: 1 }}
+      transition={{ duration: ms / 1000, ease: "linear" }}
+      className={`absolute inset-0 origin-left ${className}`}
+    />
+  );
+}
+
+/**
+ * Stories-style header: one segment per slide, the active one filling in real
+ * time. Desktop gets labels; mobile gets thin bars with the same tap targets.
+ */
+function ProgressHeader({
+  labels,
+  active,
+  totals,
+  run,
+  reduce,
+  onPick,
+}: {
+  labels: string[];
+  active: number;
+  totals: number[];
+  run: number;
+  reduce: boolean | null;
+  onPick: (i: number) => void;
+}) {
+  const last = labels.length - 1;
+
+  return (
+    <>
+      {/* mobile: thin segments, like stories */}
+      <div className="flex gap-1.5 sm:hidden">
+        {labels.map((label, i) => (
+          <button
+            key={label}
+            type="button"
+            aria-label={label}
+            aria-pressed={i === active}
+            onClick={() => onPick(i)}
+            className="flex-1 cursor-pointer py-2"
+          >
+            <span
+              className={`relative block h-[3px] overflow-hidden rounded-full ${
+                i < active ? "bg-white/40" : "bg-white/15"
+              }`}
+            >
+              {i === active && (
+                <Fill ms={totals[i]} run={run} reduce={reduce} className="bg-white/80" />
+              )}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* desktop: labelled chips with the same fill */}
+      <div className="hidden flex-wrap justify-center gap-2 sm:flex">
+        {labels.map((label, i) => (
+          <button
+            key={label}
+            type="button"
+            aria-pressed={i === active}
+            onClick={() => onPick(i)}
+            className={`relative cursor-pointer overflow-hidden rounded-full border px-4 py-2 text-[12.5px] font-medium transition-colors duration-200 ${
+              i === active
+                ? "border-white/60 text-white"
+                : i < active
+                  ? "border-white/25 bg-white/[0.07] text-white/75 hover:border-white/50"
+                  : "border-white/15 text-white/50 hover:border-white/45 hover:text-white/85"
+            }`}
+          >
+            {i === active && <Fill ms={totals[i]} run={run} reduce={reduce} />}
+            <span className="relative z-10 flex items-center gap-2">
+              {i === last && <Dot pulse={i === active} />}
+              {label}
+            </span>
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/**
+ * The causal chain, spelled out: stuck → hotkey → answered. Lights in order
+ * under the thought, every scene, so the order survives the faster pacing.
+ */
+function StepRail({ active, t }: { active: number; t: ReturnType<typeof useTranslations> }) {
+  const steps = t.raw("steps") as string[];
+
+  return (
+    <ol className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
+      {steps.map((label, i) => {
+        const now = active === i;
+        const done = active > i;
+        return (
+          <li key={label} className="flex items-center gap-2.5">
+            {i > 0 && (
+              <span aria-hidden className="text-[11px] text-white/25">
+                →
+              </span>
+            )}
+            <span
+              className={`flex items-center gap-1.5 transition-colors duration-300 ${
+                now ? "text-white" : done ? "text-white/65" : "text-white/30"
+              }`}
+            >
+              <span
+                className={`size-1.5 rounded-full transition-colors duration-300 ${
+                  now ? "io-pulse-soft bg-iris" : done ? "bg-iris/70" : "bg-white/20"
+                }`}
+              />
+              <span className="font-mono text-[10px] tracking-[0.06em] sm:text-[11px]">
+                {label}
+              </span>
+            </span>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -220,15 +364,10 @@ function ReadStage({
 }) {
   const phase = phaseOf(step);
 
-  // "notice" lights the one thing the user is stuck on and drops everything
-  // else back. From the hotkey onward the whole screen goes back and stays
-  // there, so nothing competes with the keys and then with the panel.
+  // The notice lights as soon as the thought starts, and everything else drops
+  // back. From the hotkey onward the whole screen goes behind the scrim.
   const spotlight =
-    phase === "spot" || phase === "think" || phase === "linger"
-      ? "notice"
-      : phase === "enter"
-        ? "none"
-        : "all";
+    phase === "enter" ? "none" : phase === "think" || phase === "linger" ? "notice" : "all";
 
   const dimRest =
     spotlight === "none" ? "opacity-100" : spotlight === "notice" ? "opacity-30" : "opacity-40";
@@ -469,6 +608,53 @@ function ChatStage({
   );
 }
 
+/** Slide 5: no fake window — the reader's own screen is the stage now. */
+function TurnStage({
+  t,
+  pressTick,
+  onTry,
+}: {
+  t: ReturnType<typeof useTranslations>;
+  pressTick: number;
+  onTry: () => void;
+}) {
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-7 rounded-2xl border-2 border-dashed border-white/15 bg-white/[0.03] p-6">
+      <span className="rounded-md border border-white/15 bg-white/[0.06] px-2.5 py-1 font-mono text-[10px] text-white/60">
+        {t("turn.frameUrl")} — {t("turn.frameCaption")}
+      </span>
+
+      <button
+        type="button"
+        onClick={onTry}
+        aria-label={t("turn.tap")}
+        className="flex cursor-pointer items-center gap-3"
+      >
+        {/* Nudges on every real right-Shift press, so the page visibly hears you. */}
+        <motion.span
+          key={pressTick}
+          animate={{ y: [0, 4, 0] }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+          className="io-pulse-soft inline-flex h-12 items-center justify-center rounded-xl bg-white px-5 text-[14px] font-semibold text-ink shadow-[0_6px_22px_rgba(0,0,0,0.4)]"
+        >
+          {t("hotkey")}
+        </motion.span>
+        <span className="font-mono text-[16px] font-semibold text-white">
+          {t("hotkeyTimes")}
+        </span>
+      </button>
+
+      <button
+        type="button"
+        onClick={onTry}
+        className="cursor-pointer rounded-full border border-white/25 px-4 py-2 text-[12.5px] font-medium text-white/75 transition-colors hover:border-white/60 hover:text-white"
+      >
+        {t("turn.tap")}
+      </button>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* the panel                                                           */
 /* ------------------------------------------------------------------ */
@@ -504,12 +690,12 @@ function Panel({
   );
   const typedDraft = useTyped(
     draft,
-    phase === "draft" ? "typing" : phase === "insert" ? "done" : "off",
+    scene !== "reply" ? "off" : phase === "answer" ? "typing" : "done",
     beat,
   );
 
-  const busy = phase === "reading" || phase === "drafting";
-  const busyLabel = phase === "drafting" ? t("drafting") : t("reading");
+  const busy = phase === "work";
+  const busyLabel = scene === "reply" ? t("drafting") : t("reading");
 
   return (
     <div className="rounded-2xl border border-line bg-white/95 p-4 shadow-[0_12px_40px_rgba(16,17,20,0.14)] backdrop-blur-xl">
@@ -578,7 +764,7 @@ function Panel({
                   key={row.k}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: i * 0.18 }}
+                  transition={{ duration: 0.3, delay: i * 0.16 }}
                   className="rounded-lg bg-paper px-2.5 py-2"
                 >
                   <MicroLabel>{row.k}</MicroLabel>
@@ -591,7 +777,7 @@ function Panel({
               <MicroLabel>{t("scenes.reply.draftLabel")}</MicroLabel>
               <p className="mt-2 text-[12.5px] leading-[1.7] text-ink">
                 {typedDraft}
-                {phase === "draft" && <Caret />}
+                {phase === "answer" && <Caret />}
               </p>
               {(phase === "insert" || phase === "hold") && (
                 <motion.div
@@ -614,6 +800,81 @@ function Panel({
 }
 
 /* ------------------------------------------------------------------ */
+/* the site demo — the one interactive piece                           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The scripted panel that answers about this very page. Opened by pressing
+ * right Shift twice anywhere on the page (or the buttons on slide 5), closed
+ * with Esc — both on purpose the same gestures as the real product.
+ */
+function SiteDemo({
+  state,
+  run,
+  reduce,
+  onClose,
+  t,
+}: {
+  state: "reading" | "answer";
+  run: number;
+  reduce: boolean | null;
+  onClose: () => void;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const answer = t("turn.panelAnswer");
+  const typed = useTyped(
+    answer,
+    state === "answer" ? (reduce ? "done" : "typing") : "off",
+    run,
+  );
+
+  return (
+    <motion.div
+      role="dialog"
+      aria-label={t("app")}
+      initial={reduce ? false : { opacity: 0, y: 16, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 10, scale: 0.98 }}
+      transition={{ duration: 0.35, ease: EASE }}
+      className="fixed bottom-5 right-5 z-[80] w-[min(92vw,370px)] rounded-2xl border border-line bg-white/95 p-4 shadow-[0_18px_60px_rgba(16,17,20,0.28)] backdrop-blur-xl"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <span className="flex items-center gap-2">
+          <Dot pulse={state === "reading"} />
+          <MicroLabel>{t("app")}</MicroLabel>
+        </span>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={t("turn.close")}
+          className="cursor-pointer rounded-md px-1.5 py-0.5 font-mono text-[12px] text-slate transition-colors hover:bg-paper hover:text-ink"
+        >
+          ×
+        </button>
+      </div>
+
+      <div className="mt-3.5 min-h-[96px]">
+        {state === "reading" ? (
+          <span className="flex items-center gap-2">
+            <span className="io-pulse-soft size-1.5 rounded-full bg-iris" />
+            <MicroLabel>{t("turn.panelReading")}</MicroLabel>
+          </span>
+        ) : (
+          <p className="text-[12.5px] leading-[1.7] text-ink">
+            {typed}
+            {typed.length < answer.length && <Caret />}
+          </p>
+        )}
+      </div>
+
+      <div className="mt-3 border-t border-hair pt-3">
+        <span className="font-mono text-[10px] text-faint">{t("turn.escHint")}</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* the reel                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -623,7 +884,7 @@ export default function StoryReel({
 }: {
   /** Wrap the reel in the site's dark card, as used on the home page. */
   framed?: boolean;
-  /** Let the reader pick a scene. Picking one keeps it playing on repeat. */
+  /** Show the segmented progress header. Picking a slide keeps it on repeat. */
   showTabs?: boolean;
 }) {
   const t = useTranslations("story");
@@ -635,159 +896,291 @@ export default function StoryReel({
   const scenes = useMemo<{ id: Scene; beats: Beat[] }[]>(() => {
     const say = (scene: Scene) => sayMs(t(`scenes.${scene}.monologue`));
 
-    // Shared spine: the screen goes back, a held frame, the keys, another held
-    // frame, and only then whatever this scene answers with.
+    // Shared spine: the screen goes back, then the keys land on top of it.
     const press = (scene: Scene): Beat[] => [
-      { step: `${scene}.dim`, ms: BEAT },
-      { step: `${scene}.hotkey`, ms: 1600 },
-      { step: `${scene}.keyhold`, ms: BEAT },
+      { step: `${scene}.dim`, ms: 400 },
+      { step: `${scene}.hotkey`, ms: 1250 },
     ];
 
     return [
       {
         id: "read",
         beats: [
-          { step: "read.enter", ms: 1300 },
-          { step: "read.spot", ms: 1100 },
+          { step: "read.enter", ms: 800 },
           { step: "read.think", ms: say("read") },
-          { step: "read.linger", ms: 1800 },
+          { step: "read.linger", ms: 450 },
           ...press("read"),
-          { step: "read.reading", ms: 900 },
-          { step: "read.answer", ms: typeMs(t("scenes.read.answer"), 300) },
-          { step: "read.hold", ms: 2800 },
-          { step: "read.exit", ms: 800 },
+          { step: "read.work", ms: 650 },
+          { step: "read.answer", ms: typeMs(t("scenes.read.answer")) },
+          { step: "read.hold", ms: 2100 },
+          { step: "read.exit", ms: 500 },
         ],
       },
       {
         id: "guide",
         beats: [
-          { step: "guide.enter", ms: 1500 },
+          { step: "guide.enter", ms: 850 },
           { step: "guide.think", ms: say("guide") },
-          { step: "guide.linger", ms: 1600 },
+          { step: "guide.linger", ms: 450 },
           ...press("guide"),
-          { step: "guide.reading", ms: 900 },
-          { step: "guide.answer", ms: typeMs(t("scenes.guide.answer"), 300) },
-          { step: "guide.point", ms: 2600 },
-          { step: "guide.hold", ms: 2000 },
-          { step: "guide.exit", ms: 800 },
+          { step: "guide.work", ms: 650 },
+          { step: "guide.answer", ms: typeMs(t("scenes.guide.answer")) },
+          { step: "guide.point", ms: 1700 },
+          { step: "guide.hold", ms: 1500 },
+          { step: "guide.exit", ms: 500 },
         ],
       },
       {
         id: "grasp",
         beats: [
-          { step: "grasp.enter", ms: 1400 },
+          { step: "grasp.enter", ms: 850 },
           { step: "grasp.think", ms: say("grasp") },
-          { step: "grasp.linger", ms: 1600 },
+          { step: "grasp.linger", ms: 500 },
           ...press("grasp"),
-          { step: "grasp.reading", ms: 900 },
-          { step: "grasp.answer", ms: 1400 },
-          { step: "grasp.hold", ms: 2800 },
-          { step: "grasp.exit", ms: 800 },
+          { step: "grasp.work", ms: 700 },
+          { step: "grasp.answer", ms: 1350 },
+          { step: "grasp.hold", ms: 2400 },
+          { step: "grasp.exit", ms: 500 },
         ],
       },
       {
         id: "reply",
         beats: [
-          { step: "reply.enter", ms: 1400 },
+          { step: "reply.enter", ms: 850 },
           { step: "reply.think", ms: say("reply") },
-          { step: "reply.linger", ms: 1500 },
+          { step: "reply.linger", ms: 450 },
           ...press("reply"),
-          { step: "reply.drafting", ms: 900 },
-          { step: "reply.draft", ms: typeMs(t("scenes.reply.draft"), 300) },
-          { step: "reply.insert", ms: 1800 },
-          { step: "reply.hold", ms: 2400 },
-          { step: "reply.exit", ms: 800 },
+          { step: "reply.work", ms: 650 },
+          { step: "reply.answer", ms: typeMs(t("scenes.reply.draft")) },
+          { step: "reply.insert", ms: 1400 },
+          { step: "reply.hold", ms: 1800 },
+          { step: "reply.exit", ms: 500 },
+        ],
+      },
+      {
+        id: "turn",
+        beats: [
+          { step: "turn.wait", ms: 6800 },
+          { step: "turn.exit", ms: 500 },
         ],
       },
     ];
   }, [t]);
 
-  const [pos, setPos] = useState({ scene: 0, beat: 0 });
-  // Once a scene is chosen it repeats instead of handing over to the next one.
+  const totals = useMemo(
+    () => scenes.map((s) => s.beats.reduce((sum, b) => sum + b.ms, 0)),
+    [scenes],
+  );
+
+  const [pos, setPos] = useState({ scene: 0, beat: 0, run: 0 });
+  // Once a slide is chosen it repeats instead of handing over to the next one.
   const [picked, setPicked] = useState(false);
 
+  /* --- the interactive site demo ---------------------------------- */
+
+  const [demo, setDemo] = useState<"closed" | "reading" | "answer">("closed");
+  // Counts demo openings, so a rerun retypes instead of showing stale text.
+  const [demoSeq, setDemoSeq] = useState(0);
+  // Bumped on every real right-Shift press so slide 5's keycap can react.
+  const [pressTick, setPressTick] = useState(0);
+  const lastShift = useRef(0);
+
+  const openDemo = () => {
+    setDemoSeq((n) => n + 1);
+    setDemo("reading");
+  };
+
   useEffect(() => {
-    if (reduce || !inView) return;
+    if (demo !== "reading") return;
+    const id = setTimeout(() => setDemo("answer"), reduce ? 0 : 850);
+    return () => clearTimeout(id);
+  }, [demo, reduce]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setDemo("closed");
+        return;
+      }
+      if (e.code !== "ShiftRight" || e.repeat) return;
+      const el = e.target as HTMLElement | null;
+      if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable))
+        return;
+      setPressTick((n) => n + 1);
+      const now = performance.now();
+      if (now - lastShift.current < 650) {
+        lastShift.current = 0;
+        openDemo();
+      } else {
+        lastShift.current = now;
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  /* --- the phase clock --------------------------------------------- */
+
+  useEffect(() => {
+    // The reel holds still while the reader is using the demo panel.
+    if (reduce || !inView || demo !== "closed") return;
     const beats = scenes[pos.scene].beats;
     const id = setTimeout(() => {
       setPos((prev) => {
         const last = prev.beat >= scenes[prev.scene].beats.length - 1;
-        if (!last) return { scene: prev.scene, beat: prev.beat + 1 };
+        if (!last) return { ...prev, beat: prev.beat + 1 };
         return {
           scene: picked ? prev.scene : (prev.scene + 1) % scenes.length,
           beat: 0,
+          run: prev.run + 1,
         };
       });
     }, beats[pos.beat].ms);
     return () => clearTimeout(id);
-  }, [pos, picked, inView, reduce, scenes]);
+  }, [pos, picked, inView, reduce, demo, scenes]);
+
+  // Coming back into view restarts the current slide from its first beat, so
+  // the reader never lands in the middle of a sentence.
+  const wasIn = useRef(false);
+  useEffect(() => {
+    if (inView && !wasIn.current) {
+      setPos((p) => ({ ...p, beat: 0, run: p.run + 1 }));
+    }
+    wasIn.current = inView;
+  }, [inView]);
+
+  const pick = (i: number) => {
+    setPicked(true);
+    setPos((p) => ({ scene: i, beat: 0, run: p.run + 1 }));
+  };
+
+  /* --- derived frame ------------------------------------------------ */
 
   // With reduced motion the loop never runs: show the scene at rest, answered,
   // which is the "hold" beat rather than the empty frame after it.
   const beats = scenes[pos.scene].beats;
-  const restBeat = beats.findIndex((b) => phaseOf(b.step) === "hold");
-  const step: Step = reduce ? beats[restBeat].step : beats[pos.beat].step;
+  const restIdx = Math.max(
+    beats.findIndex((b) => phaseOf(b.step) === "hold"),
+    0,
+  );
+  const step: Step = reduce ? beats[restIdx].step : beats[pos.beat].step;
   const scene = sceneOf(step);
   const phase = phaseOf(step);
+  const turn = scene === "turn";
 
   // The window is on screen for the whole scene except the frame that clears it.
   const windowOn = phase !== "exit";
   // From the hotkey onward the screen sits behind a scrim for the rest of the
   // scene, so the only lit thing left is the panel.
   const scrimOn =
+    !turn &&
     phase !== "enter" &&
-    phase !== "spot" &&
     phase !== "think" &&
     phase !== "linger" &&
     phase !== "exit";
   const panelOpen =
-    phase === "reading" ||
-    phase === "drafting" ||
+    phase === "work" ||
     phase === "answer" ||
     phase === "point" ||
-    phase === "draft" ||
     phase === "insert" ||
     phase === "hold";
-  // Beats are numbered across the whole reel so a typing pass is never mistaken
-  // for the same pass one loop earlier.
-  const beatId = pos.scene * 100 + pos.beat;
+  // Beats are numbered across runs so a typing pass is never mistaken for the
+  // same pass one loop earlier.
+  const beatId = pos.run * 100 + pos.beat;
 
-  const monologue = t(`scenes.${scene}.monologue`);
-  // The thought lands a character at a time, and only after the screen has
-  // already shown what the thought is about. On the way out it keeps its text
-  // and fades with everything else.
+  // Where the causal chain currently is: stuck → hotkey → answered.
+  const railStep = turn
+    ? 1
+    : phase === "enter" || phase === "think" || phase === "linger"
+      ? 0
+      : phase === "dim" || phase === "hotkey"
+        ? 1
+        : phase === "hold" || phase === "exit"
+          ? 3
+          : 2;
+
+  const monologue = turn ? "" : t(`scenes.${scene}.monologue`);
   const monologueReveal: "hidden" | "reveal" | "shown" = reduce
     ? "shown"
-    : phase === "enter" || phase === "spot"
+    : phase === "enter"
       ? "hidden"
       : phase === "think"
         ? "reveal"
         : "shown";
 
+  // Once the panel has answered, the answer's core line lands large in the
+  // left column — the payoff gets at least the size the problem had.
+  const echoOn =
+    !turn && (phase === "point" || phase === "insert" || phase === "hold");
+  const echo = turn ? "" : t(`scenes.${scene}.echo`);
+
+  const labels = [...tabs, t("turn.tab")];
+
   const reel = (
     <div
       ref={rootRef}
-      className="grid grid-cols-1 items-center gap-10 text-left lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-12"
+      className="grid grid-cols-1 items-center gap-9 text-left lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-12"
     >
-      {/* left: the thought, and nothing else */}
-      <motion.div
-        animate={{ opacity: phase === "exit" ? 0 : 1 }}
-        transition={{ duration: 0.4, ease: EASE }}
-        className="flex min-h-[132px] items-center sm:min-h-[164px] lg:min-h-[220px]"
-      >
-        {/* Keyed by scene so each new thought starts from its own hidden state
-            rather than cross-fading with the previous one. */}
-        <SpokenLine
-          key={scene}
-          text={monologue}
-          reveal={monologueReveal}
-          reduce={reduce}
-        />
-      </motion.div>
+      {/* left: the thought, then the answer, then how it happened */}
+      <div>
+        <motion.div
+          animate={{ opacity: phase === "exit" ? 0 : 1 }}
+          transition={{ duration: 0.35, ease: EASE }}
+          className="flex min-h-[168px] flex-col justify-start sm:min-h-[200px] lg:min-h-[248px]"
+        >
+          {turn ? (
+            <motion.div key="turn-copy" {...fade}>
+              <p className="whitespace-pre-line text-[27px] font-semibold leading-[1.22] tracking-[-0.035em] text-white sm:text-[34px] lg:text-[40px] lg:leading-[1.16]">
+                {t("turn.title")}
+              </p>
+              <p className="mt-4 max-w-[380px] text-[14.5px] leading-[1.7] text-white/65">
+                {t("turn.sub")}
+              </p>
+            </motion.div>
+          ) : (
+            <>
+              {/* Keyed by scene so each new thought starts from its own hidden
+                  state rather than cross-fading with the previous one. */}
+              <motion.div
+                animate={{ opacity: echoOn ? 0.4 : 1 }}
+                transition={{ duration: 0.4, ease: EASE }}
+              >
+                <SpokenLine
+                  key={scene}
+                  text={monologue}
+                  reveal={monologueReveal}
+                  reduce={reduce}
+                />
+              </motion.div>
+
+              <AnimatePresence>
+                {echoOn && (
+                  <motion.div
+                    initial={reduce ? false : { opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    className="mt-5 flex gap-3.5"
+                  >
+                    <span className="w-[3px] shrink-0 self-stretch rounded-full bg-iris" />
+                    <p className="text-[18px] font-semibold leading-[1.4] tracking-[-0.02em] text-white sm:text-[21px] lg:text-[23px]">
+                      {echo}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          )}
+        </motion.div>
+
+        <div className="mt-6 border-t border-white/10 pt-5 lg:mt-8">
+          <StepRail active={railStep} t={t} />
+        </div>
+      </div>
 
       {/* right: the screen, and the panel over it */}
-      <div className="relative" aria-hidden="true">
-        <div className="relative h-[352px] sm:h-[400px]">
+      <div className="relative" aria-hidden={turn ? undefined : true}>
+        <div className="relative h-[340px] sm:h-[400px]">
           <AnimatePresence mode="wait">
             {windowOn && (
               <motion.div
@@ -796,9 +1189,15 @@ export default function StoryReel({
                 animate={windowMotion.animate}
                 exit={windowMotion.exit}
                 transition={windowMotion.transition}
-                className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_2px_20px_rgba(16,17,20,0.07)]"
+                className={
+                  turn
+                    ? "absolute inset-0"
+                    : "absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_2px_20px_rgba(16,17,20,0.07)]"
+                }
               >
-                {scene === "read" ? (
+                {turn ? (
+                  <TurnStage t={t} pressTick={pressTick} onTry={openDemo} />
+                ) : scene === "read" ? (
                   <ReadStage step={step} t={t} />
                 ) : scene === "guide" ? (
                   <GuideStage step={step} t={t} />
@@ -815,7 +1214,7 @@ export default function StoryReel({
                       initial={reduce ? false : { opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.35, ease: EASE }}
+                      transition={{ duration: 0.3, ease: EASE }}
                       className="absolute inset-0 z-20 flex items-center justify-center bg-ink/50"
                     >
                       <AnimatePresence>
@@ -824,17 +1223,17 @@ export default function StoryReel({
                             initial={reduce ? false : { opacity: 0, scale: 0.94 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.97 }}
-                            // Held back so the screen is seen going dark first,
-                            // and the keys read as a separate move.
-                            transition={{ duration: 0.3, delay: 0.35, ease: EASE }}
+                            // Held back just enough that the screen is seen
+                            // going dark first, so the keys read as a move.
+                            transition={{ duration: 0.25, delay: 0.15, ease: EASE }}
                             className="flex items-center gap-3"
                           >
-                            {/* Two unhurried presses, the way the key is hit. */}
+                            {/* Two quick presses, the way the key is hit. */}
                             <motion.span
                               animate={reduce ? { y: 0 } : { y: [0, 0, 5, 0, 5, 0] }}
                               transition={{
-                                duration: 1.1,
-                                delay: 0.75,
+                                duration: 0.85,
+                                delay: 0.4,
                                 ease: "easeOut",
                                 times: [0, 0.15, 0.33, 0.52, 0.74, 0.92],
                               }}
@@ -864,7 +1263,7 @@ export default function StoryReel({
                 initial={reduce ? false : { opacity: 0, y: 16, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                transition={{ duration: 0.38, ease: EASE }}
+                transition={{ duration: 0.35, ease: EASE }}
               >
                 <Panel step={step} beat={beatId} t={t} />
               </motion.div>
@@ -875,34 +1274,42 @@ export default function StoryReel({
     </div>
   );
 
-  const tabRow = showTabs ? (
-    <div className="mt-8 flex flex-wrap justify-center gap-2.5 sm:mt-9">
-      {tabs.map((label, i) => (
-        <button
-          key={label}
-          type="button"
-          aria-pressed={i === pos.scene}
-          onClick={() => {
-            setPicked(true);
-            setPos({ scene: i, beat: 0 });
-          }}
-          className={`cursor-pointer rounded-full border px-[17px] py-[9px] text-[13px] font-medium transition-all duration-200 ${
-            i === pos.scene
-              ? "border-white bg-white text-ink"
-              : "border-white/20 bg-white/5 text-white/70 hover:border-white/60 hover:text-white"
-          }`}
-        >
-          {label}
-        </button>
-      ))}
+  const header = showTabs ? (
+    <div className="mb-7 sm:mb-9">
+      <ProgressHeader
+        labels={labels}
+        active={pos.scene}
+        totals={totals}
+        run={pos.run}
+        reduce={reduce}
+        onPick={pick}
+      />
     </div>
   ) : null;
+
+  // `demo` only leaves "closed" through client-side events, so createPortal is
+  // never reached during server rendering. Closing is intentionally instant —
+  // the same abruptness Esc has in the real product.
+  const overlay =
+    demo !== "closed"
+      ? createPortal(
+          <SiteDemo
+            state={demo}
+            run={demoSeq}
+            reduce={reduce}
+            onClose={() => setDemo("closed")}
+            t={t}
+          />,
+          document.body,
+        )
+      : null;
 
   if (!framed) {
     return (
       <>
+        {header}
         {reel}
-        {tabRow}
+        {overlay}
       </>
     );
   }
@@ -911,11 +1318,12 @@ export default function StoryReel({
     // Dark on a white page: the reel reads as footage rather than as one more
     // block of the layout, which is what keeps the beats from blurring together.
     <div
-      className="io-fade-up mt-12 w-full max-w-[1120px] rounded-3xl border border-white/10 bg-ink p-4 pb-6 sm:mt-[72px] sm:p-8 lg:p-11 lg:pb-9"
+      className="io-fade-up mt-12 w-full max-w-[1120px] rounded-3xl border border-white/10 bg-ink p-4 pb-6 pt-5 sm:mt-[72px] sm:p-8 lg:p-11 lg:pb-10 lg:pt-8"
       style={{ animationDelay: "0.4s", animationDuration: "0.7s" }}
     >
+      {header}
       {reel}
-      {tabRow}
+      {overlay}
     </div>
   );
 }

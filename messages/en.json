@@ -483,6 +483,7 @@
     "guiding": "Guiding",
     "askHint": "Ask about this screen",
     "insertHint": "⏎ to put it in the field",
+    "steps": ["Stuck on a screen", "right Shift ×2", "Answered in place"],
     "scenes": {
       "read": {
         "monologue": "Wait —\nwhat does this mean?",
@@ -490,7 +491,8 @@
         "docTitle": "Q3 summary (draft)",
         "notice": "You're not signed in. Changes are kept in this browser only and will be discarded when this session ends.",
         "answer": "You're not signed in, so this draft only exists in this browser. Close the tab and it's gone.",
-        "hint": "To keep it, you need to sign in."
+        "hint": "To keep it, you need to sign in.",
+        "echo": "Close it and it's gone — sign in to keep it."
       },
       "guide": {
         "monologue": "Where is\nthat button?",
@@ -499,7 +501,8 @@
         "docMeta": "July 2026 · auto-updated",
         "instruction": "To share this, save a CSV from Export.",
         "answer": "Export is in the toolbar, top right. Second from the end — the arrow pointing down into a tray.",
-        "pointHint": "This one"
+        "pointHint": "This one",
+        "echo": "Top right — this icon."
       },
       "grasp": {
         "monologue": "What are they\nsaying here?",
@@ -521,7 +524,8 @@
             "k": "Deadline",
             "v": "None stated"
           }
-        ]
+        ],
+        "echo": "Paused — not turned down."
       },
       "reply": {
         "monologue": "How do I\nreply to this?",
@@ -532,8 +536,21 @@
         "message": "Circling back on what you raised the other day — we're still looking into it on our side, but given where the other priorities have landed, I wonder whether it might make sense to park it for now. Of course we'll be ready to pick it straight back up the moment things change, so no need to worry on that front.",
         "draftLabel": "Suggested reply",
         "draft": "Understood — happy to park it for now. Just let me know when it's worth picking back up.",
-        "placeholder": "Message #project-akira"
+        "placeholder": "Message #project-akira",
+        "echo": "The draft is ready. ⏎ drops it in."
       }
+    },
+    "turn": {
+      "tab": "Your turn",
+      "title": "Now —\nyour turn.",
+      "sub": "Right here, on this page: press right Shift twice.",
+      "tap": "Try it",
+      "frameUrl": "universal-io.com",
+      "frameCaption": "Stay right here",
+      "panelReading": "Reading this page",
+      "panelAnswer": "You're on the Universal I/O product site. What just happened is the whole product: on any app, right Shift twice, and ask about the screen you're looking at. Free for 500 requests a month.",
+      "escHint": "Esc closes it — same as the real thing",
+      "close": "Close"
     },
     "tabs": [
       "What does this mean?",
