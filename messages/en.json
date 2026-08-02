@@ -445,5 +445,63 @@
       "What are they saying?",
       "How do I reply?"
     ]
+  },
+  "vision": {
+    "meta": {
+      "title": "Universal I/O — A vision for a gentler interface",
+      "description": "Like glasses for the mind, like a cane for the heart — Universal I/O is a soft membrane between you and every tool, smoothing the gaps of ability, language, culture, and experience."
+    },
+    "nav": {
+      "cta": "Join the mission"
+    },
+    "eyebrow": "Universal I/O — A vision",
+    "title": "A gentle membrane between you and every tool.",
+    "subtitle": "Like glasses for the mind, like a cane for the heart — Universal I/O smooths the gaps of ability, language, culture, and experience. It never takes over. It walks beside you.",
+    "ctaPrimary": "Join the mission",
+    "ctaSecondary": "See how it feels",
+    "panel": {
+      "label": "Universal I/O — live",
+      "voice": { "label": "Voice", "value": "calm · 62 dB" },
+      "tone": { "label": "Tone", "value": "warm" },
+      "energy": { "label": "Energy", "value": "34%", "note": "a pause might help" },
+      "speakers": { "label": "2 speakers", "value": "manager ↔ you · formal" },
+      "rewriteLabel": "Suggested rewrite",
+      "rewriteText": "Could we find ten quiet minutes today?"
+    },
+    "guide": {
+      "title": "Guide mode",
+      "body": "Press Shift twice — I'll read the screen with you."
+    },
+    "capture": {
+      "hotkeyHint": "One hotkey, anywhere on your Mac",
+      "appName": "Universal I/O",
+      "rawText": "Honestly this is unacceptable. Fix it or I'm escalating.",
+      "chips": ["Tone", "Clarity", "Safety"],
+      "reading": "Reading tone…",
+      "toneChip": "Tone risk: high",
+      "rewriteLabel": "Gentler rewrite",
+      "rewriteText": "This is blocking me and feels urgent — could we prioritize a fix today?",
+      "replaceHint": "to replace before it sends"
+    },
+    "monitor": {
+      "eyebrow": "Data, on your side",
+      "title": "A living dashboard of you.",
+      "subtitle": "Everything the membrane smooths is also a signal. Your mood and mental health, made visible — it can sense early signs that your body or mind might be struggling, so caring for yourself can start sooner.",
+      "disclaimer": "Signals, not diagnoses — not a medical device",
+      "cta": "Join the mission"
+    },
+    "footer": {
+      "tagline": "A gentle membrane between you and every tool.",
+      "status": "All systems operational",
+      "columns": [
+        { "title": "Product", "links": ["Overview", "Vision", "Download", "Changelog"] },
+        { "title": "Company", "links": ["About", "Mission", "Careers", "Contact"] },
+        { "title": "Resources", "links": ["Blog", "Docs", "Support", "Press kit"] },
+        { "title": "Legal", "links": ["Privacy", "Terms", "Security"] }
+      ],
+      "copyright": "© 2026 Universal I/O, Inc.",
+      "note": "Designed between Tokyo & San Francisco",
+      "social": { "x": "X (Twitter)", "github": "GitHub", "linkedin": "LinkedIn" }
+    }
   }
 }

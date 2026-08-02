@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 207.4 95.3">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#_名称未設定グラデーション_9701);
+      }
+
+      .st1 {
+        fill: url(#_名称未設定グラデーション_970);
+      }
+
+      .st2 {
+        fill: #1a1a1a;
+      }
+    </style>
+    <linearGradient id="_名称未設定グラデーション_970" data-name="名称未設定グラデーション 970" x1="80.8" y1="9.6" x2="42.1" y2="84.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="aqua"/>
+      <stop offset="1" stop-color="#002dff"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_9701" data-name="名称未設定グラデーション 970" x1="108.5" x2="69.7" y2="84.4" xlink:href="#_名称未設定グラデーション_970"/>
+  </defs>
+  <path class="st2" d="M9.4,6.4h19.9v81.4H9.4V6.4Z"/>
+  <path class="st1" d="M68.5,6.4h14l-28.2,81.4h-14.1L68.5,6.4Z"/>
+  <path class="st0" d="M96.1,6.4h14l-28.2,81.4h-14.1L96.1,6.4Z"/>
+  <path class="st2" d="M156.6,3.7c25.6,0,43.8,19.1,43.8,43.4s-18.2,43.4-43.8,43.4-43.8-19.1-43.8-43.4S130.9,3.7,156.6,3.7ZM156.6,71.6c14.4,0,23.6-10.8,23.6-24.5s-9.2-24.5-23.6-24.5-23.6,10.8-23.6,24.5,9.1,24.5,23.6,24.5Z"/>
+</svg>

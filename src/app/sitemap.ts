@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 
 const BASE_URL = "https://universal-io.com";
+// /vision and /v2 are deliberately absent: they are design references kept in
+// the repo, not pages we want indexed or found by visitors.
 const paths = [
   "",
   "/pricing",
