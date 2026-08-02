@@ -11,11 +11,11 @@ import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 const links = [
   { href: "/#what", key: "product", mono: false },
   { href: "/product#use-cases", key: "useCases", mono: false },
-  { href: "/product#principles", key: "principles", mono: false },
+  { href: "/#principles", key: "principles", mono: false },
   // A real page rather than an anchor: someone deciding whether to pay should
   // be able to reach the terms of that decision from anywhere on the site.
   { href: "/pricing", key: "pricing", mono: false },
-  { href: "/product#io", key: "io", mono: true },
+  { href: "/#io", key: "io", mono: true },
 ] as const;
 
 export default function Nav() {

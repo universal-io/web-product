@@ -6,11 +6,8 @@ import WhatItDoes from "@/components/WhatItDoes";
 import Demo from "@/components/Demo";
 import UseCases from "@/components/UseCases";
 import WhyNow from "@/components/WhyNow";
-import Principles from "@/components/Principles";
-import SymbolSystem from "@/components/SymbolSystem";
 import Trust from "@/components/Trust";
 import IOMachine from "@/components/IOMachine";
-import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 
 export async function generateMetadata({
@@ -56,11 +53,9 @@ export default async function ProductPage({
         <Demo />
         <UseCases />
         <WhyNow />
-        <Principles />
-        <SymbolSystem />
+        {/* Symbol, Principles and the closing CTA now live on the home page. */}
         <Trust />
         <IOMachine />
-        <Cta />
       </main>
       <Footer />
     </>

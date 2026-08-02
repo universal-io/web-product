@@ -2,6 +2,9 @@ import { setRequestLocale } from "next-intl/server";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Capabilities from "@/components/Capabilities";
+import SymbolSystem from "@/components/SymbolSystem";
+import Principles from "@/components/Principles";
+import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 
 // The home page shows only the finished sections. Everything else is kept
@@ -22,6 +25,9 @@ export default async function Home({
         {/* No divider between these two: the section below is grey against the
             hero's white, so the edge is already there. */}
         <Capabilities />
+        <SymbolSystem />
+        <Principles />
+        <Cta />
       </main>
       <Footer />
     </>
