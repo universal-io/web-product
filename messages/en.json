@@ -388,8 +388,7 @@
     "capabilities": {
       "kicker": "What it does",
       "title": "Reads your screen,\nhelps you respond.",
-      "lead": "One: it decodes the screen you're looking at and guides you to the right place. Two: it helps with what you put back — reading, writing, replying.",
-      "closer": "There is one thing to remember: the call itself — the Shift key on the right of your keyboard, pressed twice.",
+      "lead": "One: it decodes the screen you're looking at and guides you to the right place. Two: it helps with what you put back — reading, writing, replying.\nThere is one thing to remember: the call itself — the Shift key on the right of your keyboard, pressed twice.",
       "machine": {
         "you": "You",
         "layerCaption": "The layer between you and the screen",

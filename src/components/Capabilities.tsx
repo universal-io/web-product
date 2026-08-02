@@ -15,9 +15,6 @@ import SectionHeader from "./SectionHeader";
 // flow direction on the connecting lines (screen → you for Vision, you →
 // tools for Compose) and swaps the detail panel underneath. Until the reader
 // touches it, the two sides take turns on their own.
-//
-// The section closes on the one thing both halves share: the key that calls
-// them.
 
 type Branch = { tag: string; title: string; tagline: string };
 type Block = { n: string; title: string; body: string; points: string[] };
@@ -381,13 +378,6 @@ export default function Capabilities() {
               </motion.div>
             </AnimatePresence>
           </div>
-        </Reveal>
-
-        {/* Both halves answer to one key, so the section closes on it. */}
-        <Reveal className="mt-12 flex justify-center sm:mt-14">
-          <p className="max-w-[620px] text-balance text-center text-[16px] leading-[1.75] text-body sm:text-[17px]">
-            {t("closer")}
-          </p>
         </Reveal>
       </div>
     </section>

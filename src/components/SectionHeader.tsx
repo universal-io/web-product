@@ -33,7 +33,7 @@ export default function SectionHeader({
       </h2>
       {body && (
         <p
-          className={`mt-[22px] text-pretty text-base leading-[1.65] sm:text-lg ${
+          className={`mt-[22px] whitespace-pre-line text-pretty text-base leading-[1.65] sm:text-lg ${
             dark ? "text-faint" : "text-body"
           }`}
         >
