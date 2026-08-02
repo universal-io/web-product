@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
+import { BRAND_PATHS } from "@/lib/brand-icons";
 
 // What the product does, after the reel has shown four moments of it.
 //
@@ -18,6 +19,7 @@ import SectionHeader from "./SectionHeader";
 
 type Branch = { tag: string; title: string; tagline: string };
 type Block = { n: string; title: string; body: string; points: string[] };
+type Tool = { slug: string; label: string };
 
 type Side = "vision" | "compose";
 
@@ -72,6 +74,26 @@ function FlowLine({
   );
 }
 
+/**
+ * A brand mark, in grey. Decorative — the label next to it already names the
+ * tool, so screen readers are given the label alone.
+ */
+function BrandGlyph({ slug }: { slug: string }) {
+  const d = BRAND_PATHS[slug];
+  if (!d) return null;
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="shrink-0 text-slate"
+    >
+      <path d={d} fill="currentColor" />
+    </svg>
+  );
+}
+
 function Machine({
   sel,
   onSel,
@@ -84,7 +106,7 @@ function Machine({
   t: ReturnType<typeof useTranslations>;
 }) {
   const branches = t.raw("machine.branches") as Branch[];
-  const tools = t.raw("machine.tools") as string[];
+  const tools = t.raw("machine.tools") as Tool[];
 
   // Vision reads the screen for you: the flow comes up. Compose carries your
   // words out: the flow goes down. Colors follow the I/O convention already
@@ -163,18 +185,21 @@ function Machine({
         <FlowLine dir={dir} color={color} delay={0.4} reduce={reduce} />
       </div>
 
-      <div className="flex max-w-[880px] flex-wrap justify-center gap-2.5">
-        {tools.map((name) => (
+      {/* Enough of them that the wall reads as "anything", not as a list of
+          integrations — which is what the closing chip then says outright. */}
+      <div className="flex max-w-[880px] flex-wrap justify-center gap-2">
+        {tools.map((tool) => (
           <span
-            key={name}
-            className="rounded-full border border-line bg-paper px-[18px] py-[9px] text-sm font-medium text-body"
+            key={tool.slug}
+            className="flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-[12.5px] font-medium text-body"
           >
-            {name}
+            <BrandGlyph slug={tool.slug} />
+            {tool.label}
           </span>
         ))}
-        <span className="rounded-full border border-dashed border-edge px-[18px] py-[9px] text-sm font-medium text-slate">
-          {t("machine.toolsMore")}
-        </span>
+      </div>
+      <div className="mt-2 rounded-full border border-dashed border-edge px-[18px] py-[9px] text-sm font-medium text-slate">
+        {t("machine.toolsMore")}
       </div>
     </div>
   );

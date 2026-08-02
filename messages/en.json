@@ -404,7 +404,25 @@
             "tagline": "Reading, writing, replying"
           }
         ],
-        "tools": ["Slack", "Gmail", "Google Analytics", "Stripe", "Jira", "Notion"],
+        "tools": [
+          { "slug": "gmail", "label": "Gmail" },
+          { "slug": "googleanalytics", "label": "Google Analytics" },
+          { "slug": "stripe", "label": "Stripe" },
+          { "slug": "notion", "label": "Notion" },
+          { "slug": "jira", "label": "Jira" },
+          { "slug": "googlesheets", "label": "Google Sheets" },
+          { "slug": "figma", "label": "Figma" },
+          { "slug": "obsidian", "label": "Obsidian" },
+          { "slug": "github", "label": "GitHub" },
+          { "slug": "linear", "label": "Linear" },
+          { "slug": "shopify", "label": "Shopify" },
+          { "slug": "hubspot", "label": "HubSpot" },
+          { "slug": "zoom", "label": "Zoom" },
+          { "slug": "discord", "label": "Discord" },
+          { "slug": "x", "label": "X" },
+          { "slug": "line", "label": "LINE" },
+          { "slug": "whatsapp", "label": "WhatsApp" }
+        ],
         "toolsMore": "+ any app on your Mac"
       },
       "blocks": [
