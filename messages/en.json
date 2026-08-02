@@ -387,27 +387,45 @@
   },
     "capabilities": {
       "kicker": "What it does",
-      "title": "Call it. Then just ask.",
-      "lead": "In any app, press right Shift twice. Whatever is on screen becomes the context. That key is the only thing to remember.",
+      "title": "It does two things.",
+      "lead": "One: it decodes the screen you're looking at and guides you to the right place. Two: it helps with what you put back — reading, writing, replying. Both answer to the same call: right Shift, twice.",
+      "machine": {
+        "you": "You",
+        "layerCaption": "The layer between you and the screen",
+        "branches": [
+          {
+            "tag": "VISION",
+            "title": "Reads your screen",
+            "tagline": "Decodes it, then points at the next step"
+          },
+          {
+            "tag": "COMPOSE",
+            "title": "Helps you respond",
+            "tagline": "Reading, writing, replying"
+          }
+        ],
+        "tools": ["Slack", "Gmail", "Google Analytics", "Stripe", "Jira", "Notion"],
+        "toolsMore": "+ any app on your Mac"
+      },
       "blocks": [
         {
           "n": "01",
-          "title": "Reads the screen and explains what you don't follow",
-          "body": "If you can see it, you can ask about it — a settings page, a message that arrived, a language you don't read. Without switching apps, pasting a screenshot, or explaining the situation.",
+          "title": "Reads your screen",
+          "body": "A settings page, a warning that just appeared, an admin screen you've never opened. If you can see it, you can ask about it — without switching apps, pasting a screenshot, or explaining the situation.",
           "points": [
             "Ask what a warning, an error, or the screen itself actually means",
-            "Select something first and it explains that part only",
-            "Ask where to start, and it points at what to press next"
+            "Ask where to start, and it points at what to press next",
+            "Select something first and it explains that part only"
           ]
         },
         {
           "n": "02",
-          "title": "Helps you write",
-          "body": "Call it on something that needs a reply and the draft is already there, before you ask. Ignore it and nothing happens. Whether it gets sent is always your call.",
+          "title": "Helps you respond",
+          "body": "From reading to sending. Roundabout messages and languages you don't read get untangled into the point; on a screen that needs a reply, the draft is there before you ask. Whether it gets sent is always your call.",
           "points": [
-            "Hold the key and talk; what you said becomes text",
-            "On a screen that needs a reply, the draft is waiting",
-            "Edit it, press Enter, and it lands in the field you were in"
+            "Untangles a message into the point, and what's being asked of you",
+            "On a screen that needs a reply, the draft is already waiting",
+            "Hold the key and talk; edit; Enter drops it into the field"
           ]
         }
       ],

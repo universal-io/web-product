@@ -1,19 +1,194 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
 // What the product does, after the reel has shown four moments of it.
 //
-// Deliberately not a grid of feature cards: six equal tiles read as six things
-// to remember. There are two — read the screen, and help me write — so they get
-// two full-width blocks, and everything true of both sits underneath as smaller
-// cards. The hotkey is stated once, here, because this section doubles as the
-// thing someone reads just before they download.
+// The centerpiece is the layer diagram: you at the top, the tools at the
+// bottom, and the one dark block between them — that dark block is the
+// product, and it holds exactly two cards, because the product does exactly
+// two things. The cards are the section's navigation: picking one flips the
+// flow direction on the connecting lines (screen → you for Vision, you →
+// tools for Compose) and swaps the detail panel underneath. Until the reader
+// touches it, the two sides take turns on their own.
+//
+// Everything true of both branches sits below as smaller cards, and the
+// hotkey is stated once more just before the download button.
 
+type Branch = { tag: string; title: string; tagline: string };
 type Block = { n: string; title: string; body: string; points: string[] };
 type Item = { title: string; body: string };
 type StartStep = { n: string; title: string; body: string };
+
+type Side = "vision" | "compose";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+/* ------------------------------------------------------------------ */
+/* diagram parts                                                       */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A dashed connector with a dot travelling along it. The direction is the
+ * point: Vision flows the screen up to you, Compose flows your words down
+ * into the tools — the same line, read both ways.
+ */
+function FlowLine({
+  dir,
+  color,
+  delay = 0,
+  reduce,
+  className = "",
+}: {
+  dir: "up" | "down";
+  color: "iris" | "cyan";
+  delay?: number;
+  reduce: boolean | null;
+  className?: string;
+}) {
+  return (
+    <span className={`relative h-9 w-px ${className}`}>
+      <span className="dash-v absolute inset-0" />
+      {!reduce && (
+        <motion.span
+          key={`${dir}-${delay}`}
+          initial={false}
+          animate={{
+            y: dir === "down" ? [0, 30] : [30, 0],
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            delay,
+            repeat: Infinity,
+            ease: "linear",
+            times: [0, 0.2, 0.8, 1],
+          }}
+          className={`absolute -left-[2.5px] top-0 size-1.5 rounded-full ${
+            color === "iris" ? "bg-iris" : "bg-cyan"
+          }`}
+        />
+      )}
+    </span>
+  );
+}
+
+function Machine({
+  sel,
+  onSel,
+  reduce,
+  t,
+}: {
+  sel: Side;
+  onSel: (side: Side) => void;
+  reduce: boolean | null;
+  t: ReturnType<typeof useTranslations>;
+}) {
+  const branches = t.raw("machine.branches") as Branch[];
+  const tools = t.raw("machine.tools") as string[];
+
+  // Vision reads the screen for you: the flow comes up. Compose carries your
+  // words out: the flow goes down. Colors follow the I/O convention already
+  // used on /product — iris for input, cyan for output.
+  const dir = sel === "vision" ? "up" : "down";
+  const color = sel === "vision" ? "cyan" : "iris";
+
+  return (
+    <div className="flex flex-col items-center">
+      {/* you */}
+      <div className="flex items-center gap-2.5 rounded-full border border-line bg-white px-6 py-[11px] shadow-[0_1px_2px_rgba(16,17,20,0.04)]">
+        <span className="h-2 w-2 rounded-full bg-coral" />
+        <span className="text-[15px] font-medium">{t("machine.you")}</span>
+      </div>
+
+      <FlowLine dir={dir} color={color} reduce={reduce} />
+
+      {/* the layer — this dark block is the product */}
+      <div className="w-full max-w-[880px] rounded-2xl bg-ink p-3 sm:p-4">
+        <div className="flex flex-col items-center justify-center gap-1 py-1.5 sm:flex-row sm:gap-3">
+          <span className="text-xl font-semibold tracking-[-0.01em] text-white">
+            I<span className="text-iris">{"//"}</span>O
+          </span>
+          <span className="text-center font-mono text-[10px] uppercase tracking-[0.1em] text-faint sm:text-xs">
+            {t("machine.layerCaption")}
+          </span>
+        </div>
+
+        <div className="mt-2.5 grid grid-cols-2 gap-2 sm:gap-3">
+          {branches.map((branch, i) => {
+            const side: Side = i === 0 ? "vision" : "compose";
+            const on = sel === side;
+            return (
+              <button
+                key={branch.tag}
+                type="button"
+                aria-pressed={on}
+                onClick={() => onSel(side)}
+                className={`cursor-pointer rounded-xl border p-3.5 text-left transition-all duration-300 sm:p-5 ${
+                  on
+                    ? "border-iris/80 bg-white/[0.09] shadow-[0_0_28px_rgba(91,92,255,0.25)]"
+                    : "border-white/10 bg-white/[0.04] hover:border-white/40"
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  <span
+                    className={`size-1.5 rounded-full transition-colors duration-300 ${
+                      on ? "io-pulse-soft bg-iris" : "bg-white/25"
+                    }`}
+                  />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">
+                    {branch.tag}
+                  </span>
+                </span>
+                <div
+                  className={`mt-2 text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-300 sm:text-[19px] ${
+                    on ? "text-white" : "text-white/70"
+                  }`}
+                >
+                  {branch.title}
+                </div>
+                <div className="mt-1 text-[11px] leading-[1.5] text-white/50 sm:text-[12.5px]">
+                  {branch.tagline}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* fan out to the tools */}
+      <div className="flex w-full max-w-[880px] justify-around">
+        <FlowLine dir={dir} color={color} delay={0.2} reduce={reduce} />
+        <FlowLine dir={dir} color={color} delay={0.7} reduce={reduce} className="hidden sm:block" />
+        <FlowLine dir={dir} color={color} delay={0.9} reduce={reduce} className="hidden sm:block" />
+        <FlowLine dir={dir} color={color} delay={0.4} reduce={reduce} />
+      </div>
+
+      <div className="flex max-w-[880px] flex-wrap justify-center gap-2.5">
+        {tools.map((name) => (
+          <span
+            key={name}
+            className="rounded-full border border-line bg-paper px-[18px] py-[9px] text-sm font-medium text-body"
+          >
+            {name}
+          </span>
+        ))}
+        <span className="rounded-full border border-dashed border-edge px-[18px] py-[9px] text-sm font-medium text-slate">
+          {t("machine.toolsMore")}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* detail figures                                                      */
+/* ------------------------------------------------------------------ */
 
 function Chrome({ label }: { label: string }) {
   return (
@@ -54,7 +229,7 @@ function Bars({ widths }: { widths: string[] }) {
   );
 }
 
-/** Block 01: a screen with one thing lit, and the answer sitting over it. */
+/** Vision: a screen with one thing lit, and the answer sitting over it. */
 function ReadFigure({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-line bg-white shadow-[0_2px_20px_rgba(16,17,20,0.06)]">
@@ -84,7 +259,7 @@ function ReadFigure({ t }: { t: ReturnType<typeof useTranslations> }) {
   );
 }
 
-/** Block 02: the panel with a reply already written in it. */
+/** Compose: the panel with a reply already written in it. */
 function ComposeFigure({ t }: { t: ReturnType<typeof useTranslations> }) {
   return (
     <div className="rounded-2xl border border-line bg-white p-4 shadow-[0_2px_20px_rgba(16,17,20,0.06)] sm:p-5">
@@ -120,34 +295,71 @@ function ComposeFigure({ t }: { t: ReturnType<typeof useTranslations> }) {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* the section                                                         */
+/* ------------------------------------------------------------------ */
+
 export default function Capabilities() {
   const t = useTranslations("capabilities");
+  const reduce = useReducedMotion();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(rootRef, { amount: 0.25 });
+
   const blocks = t.raw("blocks") as Block[];
+  const branches = t.raw("machine.branches") as Branch[];
   const foundation = t.raw("foundation.items") as Item[];
   const steps = t.raw("start.steps") as StartStep[];
+
+  const [sel, setSel] = useState<Side>("vision");
+  const touched = useRef(false);
+
+  // The two sides take turns until the reader picks one themselves.
+  useEffect(() => {
+    if (reduce || !inView) return;
+    const id = setInterval(() => {
+      if (touched.current) return;
+      setSel((s) => (s === "vision" ? "compose" : "vision"));
+    }, 7000);
+    return () => clearInterval(id);
+  }, [reduce, inView]);
+
+  const pick = (side: Side) => {
+    touched.current = true;
+    setSel(side);
+  };
+
+  const idx = sel === "vision" ? 0 : 1;
+  const block = blocks[idx];
+  const branch = branches[idx];
 
   return (
     <section id="what" className="scroll-mt-16 border-y border-hair bg-paper">
       <div className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-10 sm:py-[110px]">
         <SectionHeader kicker={t("kicker")} title={t("title")} body={t("lead")} />
 
-        {/* the two things there are to know */}
-        <div className="mt-12 flex flex-col gap-4 sm:mt-16 sm:gap-5">
-          {blocks.map((block, i) => (
-            <Reveal
-              key={block.n}
-              delay={i * 80}
-              className="rounded-[22px] border border-line bg-white p-6 sm:p-8 lg:p-10"
-            >
-              <div
-                className={`grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
-                  // the second block mirrors, so the page alternates instead of
-                  // repeating the same left-right beat twice
-                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
+        {/* the layer diagram — where the product sits, and its two halves */}
+        <Reveal className="mt-12 sm:mt-16">
+          <div ref={rootRef}>
+            <Machine sel={sel} onSel={pick} reduce={reduce} t={t} />
+          </div>
+        </Reveal>
+
+        {/* what the picked half does, in full */}
+        <Reveal className="mt-8 sm:mt-10">
+          <div className="overflow-hidden rounded-[22px] border border-line bg-white">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={sel}
+                initial={reduce ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.28, ease: EASE }}
+                className="grid grid-cols-1 items-center gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:gap-12 lg:p-10"
               >
                 <div>
-                  <div className="font-mono text-[13px] text-iris">{block.n}</div>
+                  <div className="font-mono text-[12px] uppercase tracking-[0.14em] text-iris">
+                    {branch.tag}
+                  </div>
                   <h3 className="mt-3.5 text-balance text-[22px] font-semibold leading-[1.28] tracking-[-0.02em] sm:text-[26px]">
                     {block.title}
                   </h3>
@@ -170,13 +382,11 @@ export default function Capabilities() {
                   </ul>
                 </div>
 
-                <div>
-                  {i === 0 ? <ReadFigure t={t} /> : <ComposeFigure t={t} />}
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+                <div>{sel === "vision" ? <ReadFigure t={t} /> : <ComposeFigure t={t} />}</div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </Reveal>
 
         {/* true of both, so it sits under both rather than inside either */}
         <div className="mt-12 sm:mt-14">
