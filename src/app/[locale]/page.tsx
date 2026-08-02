@@ -1,18 +1,11 @@
 import { setRequestLocale } from "next-intl/server";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Problem from "@/components/Problem";
-import WhatItDoes from "@/components/WhatItDoes";
-import Demo from "@/components/Demo";
-import UseCases from "@/components/UseCases";
-import WhyNow from "@/components/WhyNow";
-import Principles from "@/components/Principles";
-import SymbolSystem from "@/components/SymbolSystem";
-import Trust from "@/components/Trust";
-import IOMachine from "@/components/IOMachine";
-import Cta from "@/components/Cta";
+import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
 
+// The home page shows only the finished sections. Everything else is kept
+// intact on /product and moves back here as it is reworked.
 export default async function Home({
   params,
 }: {
@@ -36,17 +29,7 @@ export default async function Home({
           <div className="h-px flex-1 bg-hair" />
         </div>
 
-        <Problem />
-        <WhatItDoes />
-        <Demo />
-        <UseCases />
-        <WhyNow />
-        <Principles />
-        <SymbolSystem />
-        <Trust />
-        {/* Parked here while the page is reworked from the top down. */}
-        <IOMachine />
-        <Cta />
+        <Capabilities />
       </main>
       <Footer />
     </>

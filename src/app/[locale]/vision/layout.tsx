@@ -52,9 +52,11 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
     },
+    // Kept in the repo as a design reference, not published as a page. It stays
+    // out of the sitemap and out of search until we decide where it belongs.
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
     },
   };
 }

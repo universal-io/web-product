@@ -109,6 +109,11 @@
     "systemsLabel": "What systems expect",
     "systems": ["CRM", "Slack", "Jira", "Notion", "HRIS", "Support desk", "AI agents", "Compliance logs"]
   },
+  "productPage": {
+    "kicker": "Product",
+    "title": "A longer look at Universal I/O.",
+    "subtitle": "The home page shows only what is finished. This page holds the rest \u2014 the problem Universal I/O is built for, and the principles behind it. Sections move up to the home page as they take their final shape."
+  },
   "product": {
     "kicker": "What Universal I/O does",
     "title": "A small layer before every big workflow.",
@@ -380,6 +385,94 @@
     ],
     "note": "This page is a placeholder. It will be replaced with the full disclosure required by Japan's Act on Specified Commercial Transactions before paid plans go on sale."
   },
+    "capabilities": {
+      "kicker": "What it does",
+      "title": "Call it. Then just ask.",
+      "lead": "In any app, press right Shift twice. Whatever is on screen becomes the context. That key is the only thing to remember.",
+      "blocks": [
+        {
+          "n": "01",
+          "title": "Reads the screen and explains what you don't follow",
+          "body": "If you can see it, you can ask about it — a settings page, a message that arrived, a language you don't read. Without switching apps, pasting a screenshot, or explaining the situation.",
+          "points": [
+            "Ask what a warning, an error, or the screen itself actually means",
+            "Select something first and it explains that part only",
+            "Ask where to start, and it points at what to press next"
+          ]
+        },
+        {
+          "n": "02",
+          "title": "Helps you write",
+          "body": "Call it on something that needs a reply and the draft is already there, before you ask. Ignore it and nothing happens. Whether it gets sent is always your call.",
+          "points": [
+            "Hold the key and talk; what you said becomes text",
+            "On a screen that needs a reply, the draft is waiting",
+            "Edit it, press Enter, and it lands in the field you were in"
+          ]
+        }
+      ],
+      "figures": {
+        "read": {
+          "url": "app.example.com/drafts",
+          "notice": "You're not signed in. Changes are kept in this browser only.",
+          "app": "UNIVERSAL I/O",
+          "hotkey": "right Shift ×2",
+          "answer": "You're not signed in, so these changes only exist in this browser. Close the page and they're gone."
+        },
+        "compose": {
+          "app": "UNIVERSAL I/O",
+          "hotkey": "right Shift ×2",
+          "draftLabel": "Suggested reply",
+          "draft": "Understood — happy to park it for now. Just let me know when it's worth picking back up.",
+          "voice": "hold to talk",
+          "send": "⏎ to insert"
+        }
+      },
+      "foundation": {
+        "kicker": "True of both",
+        "items": [
+          {
+            "title": "The same key everywhere",
+            "body": "If it runs on your Mac, it works — no waiting for the app to add support."
+          },
+          {
+            "title": "It knows your tools",
+            "body": "Slack, Gmail, Google Analytics, Stripe. Whatever knowledge is in play is always shown in the panel."
+          },
+          {
+            "title": "The screen isn't kept",
+            "body": "Images are used only while answering. It reads the hostname and never the path or query."
+          },
+          {
+            "title": "English and Japanese",
+            "body": "Pick the language it answers in; it starts from your Mac's own setting."
+          }
+        ]
+      },
+      "start": {
+        "kicker": "Getting started",
+        "title": "Three steps, then it's just right Shift.",
+        "steps": [
+          {
+            "n": "01",
+            "title": "Download it",
+            "body": "macOS 14 or later. Notarized by Apple, so it opens as-is."
+          },
+          {
+            "n": "02",
+            "title": "Grant two permissions",
+            "body": "It reads the screen, so it needs Screen Recording and Accessibility."
+          },
+          {
+            "n": "03",
+            "title": "Create an account",
+            "body": "The free plan runs every feature, up to 500 requests a month."
+          }
+        ],
+        "cta": "Download for macOS",
+        "ctaNote": "macOS 14+ · notarized by Apple"
+      }
+    },
   "story": {
     "hotkey": "right Shift",
     "hotkeyTimes": "×2",
@@ -392,7 +485,7 @@
     "insertHint": "⏎ to put it in the field",
     "scenes": {
       "read": {
-        "monologue": "Wait — what does this mean?",
+        "monologue": "Wait —\nwhat does this mean?",
         "url": "app.example.com/drafts",
         "docTitle": "Q3 summary (draft)",
         "notice": "You're not signed in. Changes are kept in this browser only and will be discarded when this session ends.",
@@ -400,23 +493,21 @@
         "hint": "To keep it, you need to sign in."
       },
       "guide": {
-        "monologue": "Where's that button?",
-        "ask": "Where's that button?",
-        "step1": "Top right — press “Sign in”.",
-        "step2": "Now press “Continue with Google”.",
-        "done": "You're signed in. The draft is saved to your account.",
-        "signinTitle": "Sign in to save your work",
-        "signinGoogle": "Continue with Google",
-        "signinEmail": "Continue with email",
-        "savedBadge": "Saved to your account"
+        "monologue": "Where is\nthat button?",
+        "url": "app.example.com/reports",
+        "docTitle": "Monthly report",
+        "docMeta": "July 2026 · auto-updated",
+        "instruction": "To share this, save a CSV from Export.",
+        "answer": "Export is in the toolbar, top right. Second from the end — the arrow pointing down into a tray.",
+        "pointHint": "This one"
       },
       "grasp": {
-        "monologue": "So… what are they actually saying?",
+        "monologue": "What are they\nsaying here?",
         "app": "Slack",
-        "channel": "#project-akira",
-        "sender": "Taylor",
-        "time": "2:32 PM",
-        "message": "Circling back on what you raised the other day — we're still looking into it on our side, but given where the other priorities have landed, I wonder whether it might make sense to park it for now. Of course we'll be ready to pick it straight back up the moment things change, so no need to worry on that front.",
+        "channel": "#partner-seoul",
+        "sender": "김민서",
+        "time": "10:24 AM",
+        "message": "지난번에 문의해 주신 건에 대해서는 저희 쪽에서도 계속 확인을 진행하고 있습니다만, 다른 안건과의 우선순위 문제도 있어서 현재로서는 일단 보류하는 형태로 해주실 수 있을지 검토하고 있습니다. 물론 상황이 바뀌는 대로 바로 움직일 수 있도록 준비해 두겠으니 그 점은 안심해 주시면 감사하겠습니다.",
         "rows": [
           {
             "k": "The point",
@@ -433,7 +524,12 @@
         ]
       },
       "reply": {
-        "monologue": "How do I even reply to this…",
+        "monologue": "How do I\nreply to this?",
+        "app": "Slack",
+        "channel": "#project-akira",
+        "sender": "Taylor",
+        "time": "2:32 PM",
+        "message": "Circling back on what you raised the other day — we're still looking into it on our side, but given where the other priorities have landed, I wonder whether it might make sense to park it for now. Of course we'll be ready to pick it straight back up the moment things change, so no need to worry on that front.",
         "draftLabel": "Suggested reply",
         "draft": "Understood — happy to park it for now. Just let me know when it's worth picking back up.",
         "placeholder": "Message #project-akira"

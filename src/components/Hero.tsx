@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import StoryReel from "@/components/StoryReel";
+import { Link } from "@/i18n/navigation";
 import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
 export default function Hero() {
@@ -37,12 +38,13 @@ export default function Hero() {
         >
           {t("ctaPrimary")}
         </a>
-        <a
-          href="#demo"
+        {/* The demo it used to scroll to now lives on /product. */}
+        <Link
+          href="/product#demo"
           className="rounded-xl border border-edge bg-white px-7 py-3.5 text-base font-semibold text-ink transition-colors hover:border-ink"
         >
           {t("ctaSecondary")}
-        </a>
+        </Link>
       </div>
       <div
         className="io-fade-up mt-[22px] font-mono text-xs tracking-[0.04em] text-faint"

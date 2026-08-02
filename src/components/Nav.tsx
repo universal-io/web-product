@@ -6,14 +6,16 @@ import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
+// These used to be home-page anchors. The sections they point at now live on
+// /product, so the links follow them rather than scrolling to nothing.
 const links = [
-  { href: "/#product", key: "product", mono: false },
-  { href: "/#use-cases", key: "useCases", mono: false },
-  { href: "/#principles", key: "principles", mono: false },
+  { href: "/#what", key: "product", mono: false },
+  { href: "/product#use-cases", key: "useCases", mono: false },
+  { href: "/product#principles", key: "principles", mono: false },
   // A real page rather than an anchor: someone deciding whether to pay should
   // be able to reach the terms of that decision from anywhere on the site.
   { href: "/pricing", key: "pricing", mono: false },
-  { href: "/#io", key: "io", mono: true },
+  { href: "/product#io", key: "io", mono: true },
 ] as const;
 
 export default function Nav() {

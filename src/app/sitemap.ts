@@ -6,6 +6,7 @@ const BASE_URL = "https://universal-io.com";
 // the repo, not pages we want indexed or found by visitors.
 const paths = [
   "",
+  "/product",
   "/pricing",
   "/company",
   "/privacy",
