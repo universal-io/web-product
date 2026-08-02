@@ -19,7 +19,8 @@ import { BRAND_PATHS } from "@/lib/brand-icons";
 
 type Branch = { tag: string; title: string; tagline: string };
 type Block = { n: string; title: string; body: string; points: string[] };
-type Tool = { slug: string; label: string };
+/** No `slug` means no mark is available for that brand — the label stands alone. */
+type Tool = { slug?: string; label: string };
 
 type Side = "vision" | "compose";
 
@@ -78,8 +79,8 @@ function FlowLine({
  * A brand mark, in grey. Decorative — the label next to it already names the
  * tool, so screen readers are given the label alone.
  */
-function BrandGlyph({ slug }: { slug: string }) {
-  const d = BRAND_PATHS[slug];
+function BrandGlyph({ slug }: { slug?: string }) {
+  const d = slug ? BRAND_PATHS[slug] : undefined;
   if (!d) return null;
   return (
     <svg
@@ -190,7 +191,7 @@ function Machine({
       <div className="flex max-w-[880px] flex-wrap justify-center gap-2">
         {tools.map((tool) => (
           <span
-            key={tool.slug}
+            key={tool.label}
             className="flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-[12.5px] font-medium text-body"
           >
             <BrandGlyph slug={tool.slug} />
