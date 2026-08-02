@@ -211,10 +211,12 @@ function Fill({
 }
 
 /**
- * Stories-style header: one segment per slide, the active one filling in real
- * time. Desktop gets labels; mobile gets thin bars with the same tap targets.
+ * Stories-style indicator: one segment per slide, the active one filling in
+ * real time. It sits under the reel on the page's own white, so the reel keeps
+ * its edges as footage and the controls read as controls. Desktop gets
+ * labels; mobile gets thin bars with the same tap targets.
  */
-function ProgressHeader({
+function ProgressIndicator({
   labels,
   active,
   totals,
@@ -246,11 +248,11 @@ function ProgressHeader({
           >
             <span
               className={`relative block h-[3px] overflow-hidden rounded-full ${
-                i < active ? "bg-white/40" : "bg-white/15"
+                i < active ? "bg-edge" : "bg-hair"
               }`}
             >
               {i === active && (
-                <Fill ms={totals[i]} run={run} reduce={reduce} className="bg-white/80" />
+                <Fill ms={totals[i]} run={run} reduce={reduce} className="bg-ink" />
               )}
             </span>
           </button>
@@ -267,13 +269,15 @@ function ProgressHeader({
             onClick={() => onPick(i)}
             className={`relative cursor-pointer overflow-hidden rounded-full border px-4 py-2 text-[12.5px] font-medium transition-colors duration-200 ${
               i === active
-                ? "border-white/60 text-white"
+                ? "border-ink text-ink"
                 : i < active
-                  ? "border-white/25 bg-white/[0.07] text-white/75 hover:border-white/50"
-                  : "border-white/15 text-white/50 hover:border-white/45 hover:text-white/85"
+                  ? "border-line bg-white text-body hover:border-ink"
+                  : "border-line bg-paper text-slate hover:border-ink hover:text-ink"
             }`}
           >
-            {i === active && <Fill ms={totals[i]} run={run} reduce={reduce} />}
+            {i === active && (
+              <Fill ms={totals[i]} run={run} reduce={reduce} className="bg-ink/[0.07]" />
+            )}
             <span className="relative z-10 flex items-center gap-2">
               {i === last && <Dot pulse={i === active} />}
               {label}
@@ -1274,17 +1278,15 @@ export default function StoryReel({
     </div>
   );
 
-  const header = showTabs ? (
-    <div className="mb-7 sm:mb-9">
-      <ProgressHeader
-        labels={labels}
-        active={pos.scene}
-        totals={totals}
-        run={pos.run}
-        reduce={reduce}
-        onPick={pick}
-      />
-    </div>
+  const indicator = showTabs ? (
+    <ProgressIndicator
+      labels={labels}
+      active={pos.scene}
+      totals={totals}
+      run={pos.run}
+      reduce={reduce}
+      onPick={pick}
+    />
   ) : null;
 
   // `demo` only leaves "closed" through client-side events, so createPortal is
@@ -1307,22 +1309,27 @@ export default function StoryReel({
   if (!framed) {
     return (
       <>
-        {header}
         {reel}
+        {indicator && <div className="mt-7 sm:mt-8">{indicator}</div>}
         {overlay}
       </>
     );
   }
 
   return (
-    // Dark on a white page: the reel reads as footage rather than as one more
-    // block of the layout, which is what keeps the beats from blurring together.
     <div
-      className="io-fade-up mt-12 w-full max-w-[1120px] rounded-3xl border border-white/10 bg-ink p-4 pb-6 pt-5 sm:mt-[72px] sm:p-8 lg:p-11 lg:pb-10 lg:pt-8"
+      className="io-fade-up mt-12 w-full max-w-[1120px] sm:mt-[72px]"
       style={{ animationDelay: "0.4s", animationDuration: "0.7s" }}
     >
-      {header}
-      {reel}
+      {/* Dark on a white page: the reel reads as footage rather than as one
+          more block of the layout, which is what keeps the beats from
+          blurring together. */}
+      <div className="rounded-3xl border border-white/10 bg-ink p-4 pb-6 sm:p-8 lg:p-11 lg:pb-10">
+        {reel}
+      </div>
+      {/* The indicator belongs to the page, not to the footage — it sits
+          under the frame the way a caption or a control strip would. */}
+      {indicator && <div className="mt-6 sm:mt-7">{indicator}</div>}
       {overlay}
     </div>
   );
