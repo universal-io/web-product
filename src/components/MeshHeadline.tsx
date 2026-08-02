@@ -29,14 +29,24 @@ const PAD = 72;
 /** Grid density. Enough that the deformation reads as smooth, not faceted. */
 const COLS = 64;
 const ROWS = 36;
+/**
+ * The one knob. Scales both forces together, because lowering only the pull
+ * leaves the drag to carry the whole effect while the cursor is moving. At 1
+ * the sheet visibly bulges; at 0.1 it is a few pixels and easy to miss.
+ */
+const INTENSITY = 0.1;
 /** Radius of the cursor's influence, as a fraction of the headline's height. */
-const SIGMA = 0.62;
-/** How hard the sheet is sucked toward the cursor at full strength. */
-const PULL = 0.34;
-/** How far the sheet trails behind the cursor's motion. */
-const DRAG = 2.4;
-/** How far the colour fringes separate, relative to the local displacement. */
-const SPLIT = 0.55;
+const SIGMA = 0.5;
+/** How hard the sheet is sucked toward the cursor, before INTENSITY. */
+const PULL = 0.34 * INTENSITY;
+/** How far the sheet trails behind the cursor's motion, before INTENSITY. */
+const DRAG = 2.4 * INTENSITY;
+/**
+ * Fringe separation as a fraction of the local displacement. Not scaled by
+ * INTENSITY — it is already proportional to how far the sheet has moved, so
+ * scaling it twice would remove the colour entirely.
+ */
+const SPLIT = 0.4;
 /** Chase rates: the cursor is followed loosely, the forces spring. */
 const CHASE = 0.16;
 const STIFF = 0.1;
