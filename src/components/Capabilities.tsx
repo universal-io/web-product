@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
-import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 
 // What the product does, after the reel has shown four moments of it.
 //
@@ -17,13 +16,11 @@ import { MACOS_DOWNLOAD_URL } from "@/lib/download";
 // tools for Compose) and swaps the detail panel underneath. Until the reader
 // touches it, the two sides take turns on their own.
 //
-// Everything true of both branches sits below as smaller cards, and the
-// hotkey is stated once more just before the download button.
+// The section closes on the one thing both halves share: the key that calls
+// them.
 
 type Branch = { tag: string; title: string; tagline: string };
 type Block = { n: string; title: string; body: string; points: string[] };
-type Item = { title: string; body: string };
-type StartStep = { n: string; title: string; body: string };
 
 type Side = "vision" | "compose";
 
@@ -307,8 +304,6 @@ export default function Capabilities() {
 
   const blocks = t.raw("blocks") as Block[];
   const branches = t.raw("machine.branches") as Branch[];
-  const foundation = t.raw("foundation.items") as Item[];
-  const steps = t.raw("start.steps") as StartStep[];
 
   const [sel, setSel] = useState<Side>("vision");
   const touched = useRef(false);
@@ -388,59 +383,11 @@ export default function Capabilities() {
           </div>
         </Reveal>
 
-        {/* true of both, so it sits under both rather than inside either */}
-        <div className="mt-12 sm:mt-14">
-          <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
-            {t("foundation.kicker")}
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {foundation.map((item, i) => (
-              <Reveal
-                key={item.title}
-                delay={i * 60}
-                className="rounded-2xl border border-line bg-white p-5"
-              >
-                <h4 className="text-[15px] font-semibold leading-snug tracking-[-0.01em]">
-                  {item.title}
-                </h4>
-                <p className="mt-2 text-[13.5px] leading-[1.7] text-body">{item.body}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        {/* what actually happens after the download button, said before it */}
-        <Reveal className="mt-12 rounded-[22px] border border-line bg-white p-6 sm:mt-14 sm:p-8">
-          <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
-            {t("start.kicker")}
-          </div>
-          <h3 className="mt-3 text-balance text-[20px] font-semibold tracking-[-0.02em] sm:text-[23px]">
-            {t("start.title")}
-          </h3>
-
-          <ol className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6">
-            {steps.map((step) => (
-              <li key={step.n} className="border-t border-hair pt-4">
-                <div className="font-mono text-[11px] text-iris">{step.n}</div>
-                <div className="mt-2 text-[15px] font-semibold tracking-[-0.01em]">
-                  {step.title}
-                </div>
-                <p className="mt-1.5 text-[13.5px] leading-[1.7] text-body">{step.body}</p>
-              </li>
-            ))}
-          </ol>
-
-          <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <a
-              href={MACOS_DOWNLOAD_URL}
-              className="rounded-xl bg-ink px-7 py-[15px] text-base font-semibold text-white transition-colors hover:bg-iris"
-            >
-              {t("start.cta")}
-            </a>
-            <span className="font-mono text-xs tracking-[0.04em] text-faint">
-              {t("start.ctaNote")}
-            </span>
-          </div>
+        {/* Both halves answer to one key, so the section closes on it. */}
+        <Reveal className="mt-12 flex justify-center sm:mt-14">
+          <p className="max-w-[620px] text-balance text-center text-[16px] leading-[1.75] text-body sm:text-[17px]">
+            {t("closer")}
+          </p>
         </Reveal>
       </div>
     </section>

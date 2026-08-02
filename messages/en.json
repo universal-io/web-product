@@ -387,8 +387,9 @@
   },
     "capabilities": {
       "kicker": "What it does",
-      "title": "It does two things.",
-      "lead": "One: it decodes the screen you're looking at and guides you to the right place. Two: it helps with what you put back — reading, writing, replying. Both answer to the same call: right Shift, twice.",
+      "title": "Reads your screen,\nhelps you respond.",
+      "lead": "One: it decodes the screen you're looking at and guides you to the right place. Two: it helps with what you put back — reading, writing, replying.",
+      "closer": "There is one thing to remember: the call itself — the Shift key on the right of your keyboard, pressed twice.",
       "machine": {
         "you": "You",
         "layerCaption": "The layer between you and the screen",
@@ -445,50 +446,6 @@
           "voice": "hold to talk",
           "send": "⏎ to insert"
         }
-      },
-      "foundation": {
-        "kicker": "True of both",
-        "items": [
-          {
-            "title": "The same key everywhere",
-            "body": "If it runs on your Mac, it works — no waiting for the app to add support."
-          },
-          {
-            "title": "It knows your tools",
-            "body": "Slack, Gmail, Google Analytics, Stripe. Whatever knowledge is in play is always shown in the panel."
-          },
-          {
-            "title": "The screen isn't kept",
-            "body": "Images are used only while answering. It reads the hostname and never the path or query."
-          },
-          {
-            "title": "English and Japanese",
-            "body": "Pick the language it answers in; it starts from your Mac's own setting."
-          }
-        ]
-      },
-      "start": {
-        "kicker": "Getting started",
-        "title": "Three steps, then it's just right Shift.",
-        "steps": [
-          {
-            "n": "01",
-            "title": "Download it",
-            "body": "macOS 14 or later. Notarized by Apple, so it opens as-is."
-          },
-          {
-            "n": "02",
-            "title": "Grant two permissions",
-            "body": "It reads the screen, so it needs Screen Recording and Accessibility."
-          },
-          {
-            "n": "03",
-            "title": "Create an account",
-            "body": "The free plan runs every feature, up to 500 requests a month."
-          }
-        ],
-        "cta": "Download for macOS",
-        "ctaNote": "macOS 14+ · notarized by Apple"
       }
     },
   "story": {

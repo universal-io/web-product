@@ -23,7 +23,9 @@ export default function SectionHeader({
         {kicker}
       </div>
       <h2
-        className={`text-balance text-[32px] font-semibold leading-[1.14] tracking-[-0.03em] sm:text-[40px] lg:text-[48px] lg:leading-[1.1] ${
+        // Line breaks authored in the message are kept, so a title that was
+        // written as two lines stays two lines at every width.
+        className={`whitespace-pre-line text-balance text-[32px] font-semibold leading-[1.14] tracking-[-0.03em] sm:text-[40px] lg:text-[48px] lg:leading-[1.1] ${
           dark ? "text-white" : "text-ink"
         }`}
       >
